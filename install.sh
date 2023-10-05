@@ -11,7 +11,6 @@ ROOT_UID=0
 DEST_DIR=
 
 ctype=
-window=
 
 # Destination directory
 if [ "$UID" -eq "$ROOT_UID" ]; then
@@ -80,7 +79,6 @@ install() {
   local color="${4}"
   local size="${5}"
   local ctype="${6}"
-  local window="${7}"
 
   [[ "${color}" == '-Light' ]] && local ELSE_LIGHT="${color}"
   [[ "${color}" == '-Dark' ]] && local ELSE_DARK="${color}"
@@ -147,20 +145,20 @@ install() {
   cp -r "${SRC_DIR}/assets/cinnamon/thumbnails/thumbnail${theme}${ctype}${color}.png"        "${THEME_DIR}/cinnamon/thumbnail.png"
 
   mkdir -p                                                                                   "${THEME_DIR}/metacity-1"
-  cp -r "${SRC_DIR}/main/metacity-1/metacity-theme-3${window}.xml"                           "${THEME_DIR}/metacity-1/metacity-theme-3.xml"
-  cp -r "${SRC_DIR}/assets/metacity-1/assets${window}"                                       "${THEME_DIR}/metacity-1/assets"
+  cp -r "${SRC_DIR}/main/metacity-1/metacity-theme-3.xml"                                    "${THEME_DIR}/metacity-1/metacity-theme-3.xml"
+  cp -r "${SRC_DIR}/assets/metacity-1/assets"                                                "${THEME_DIR}/metacity-1/assets"
   cp -r "${SRC_DIR}/assets/metacity-1/thumbnail${ELSE_DARK:-}.png"                           "${THEME_DIR}/metacity-1/thumbnail.png"
   cd "${THEME_DIR}/metacity-1" && ln -s metacity-theme-3.xml metacity-theme-1.xml && ln -s metacity-theme-3.xml metacity-theme-2.xml
 
   mkdir -p                                                                                   "${THEME_DIR}/xfwm4"
-  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}${window}/"*.png               "${THEME_DIR}/xfwm4"
+  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}/"*.png                        "${THEME_DIR}/xfwm4"
   cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                       "${THEME_DIR}/xfwm4/themerc"
   mkdir -p                                                                                   "${THEME_DIR}-hdpi/xfwm4"
-  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}${window}-hdpi/"*.png          "${THEME_DIR}-hdpi/xfwm4"
+  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}-hdpi/"*.png                   "${THEME_DIR}-hdpi/xfwm4"
   cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                       "${THEME_DIR}-hdpi/xfwm4/themerc"
   sed -i "s/button_offset=6/button_offset=9/"                                                "${THEME_DIR}-hdpi/xfwm4/themerc"
   mkdir -p                                                                                   "${THEME_DIR}-xhdpi/xfwm4"
-  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}${window}-xhdpi/"*.png         "${THEME_DIR}-xhdpi/xfwm4"
+  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}${ctype}-xhdpi/"*.png                  "${THEME_DIR}-xhdpi/xfwm4"
   cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                       "${THEME_DIR}-xhdpi/xfwm4/themerc"
   sed -i "s/button_offset=6/button_offset=12/"                                               "${THEME_DIR}-xhdpi/xfwm4/themerc"
 
@@ -430,14 +428,6 @@ blackness_color() {
   sed -i "/\$blackness:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
 }
 
-border_rimless() {
-  sed -i "/\$rimless:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-normal_winbutton() {
-  sed -i "/\$window_button:/s/mac/normal/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
 float_panel() {
   sed -i "/\$float:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
 }
@@ -510,14 +500,6 @@ theme_tweaks() {
     blackness_color
   fi
 
-  if [[ "$rimless" = "true" ]] ; then
-    border_rimless
-  fi
-
-  if [[ "$normal" = "true" ]] ; then
-    normal_winbutton
-  fi
-
   if [[ "$float" = "true" ]] ; then
     float_panel
   fi
@@ -557,45 +539,12 @@ link_theme() {
   done
 }
 
-clean() {
-  local dest="${1}"
-  local name="${2}"
-  local theme="${3}"
-  local color="${4}"
-  local size="${5}"
-  local type="${6}"
-  local screen="${7}"
-
-  local THEME_DIR="${1}/${2}${3}${4}${5}${6}${7}"
-
-  if [[ ${theme} == '' && ${color} == '' && ${size} == '' && ${type} == '' ]]; then
-    cleantheme='none'
-  elif [[ -d ${THEME_DIR} ]]; then
-    rm -rf ${THEME_DIR}
-    echo -e "Find: ${THEME_DIR} ! removing it ..."
-  fi
-}
-
-clean_theme() {
-  for theme in '' '-purple' '-pink' '-red' '-orange' '-yellow' '-green' '-teal' '-grey'; do
-    for color in '' '-light' '-dark'; do
-      for size in '' '-compact'; do
-        for type in '' '-nord' '-dracula' '-gruvbox'; do
-          for screen in '' '-hdpi' '-xhdpi'; do
-            clean "${dest:-${DEST_DIR}}" "${name:-${THEME_NAME}}" "${theme}" "${color}" "${size}" "${type}" "${screen}"
-          done
-        done
-      done
-    done
-  done
-}
-
 install_theme() {
   for theme in "${themes[@]}"; do
     for color in "${colors[@]}"; do
       for size in "${sizes[@]}"; do
-        install "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype" "$window"
-        make_gtkrc "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype" "$window"
+        install "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
+        make_gtkrc "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
       done
     done
   done
@@ -643,7 +592,7 @@ if [[ "$uninstall" == 'true' ]]; then
     echo && uninstall_theme && uninstall_link
   fi
 else
-  clean_theme && install_package && tweaks_temp && gnome_shell_version && install_theme
+  install_package && tweaks_temp && gnome_shell_version && install_theme
   if [[ "$libadwaita" == 'true' ]]; then
     uninstall_link && link_theme
   fi
