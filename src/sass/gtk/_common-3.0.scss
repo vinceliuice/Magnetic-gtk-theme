@@ -2552,13 +2552,6 @@ scale {
 
   &.vertical { padding: 12px ($medium-size - $trough_size) / 2; }
 
-  // the slider is inside the trough, so to have make it bigger there's a negative margin
-  slider {
-    min-height: $slider_size;
-    min-width: $slider_size;
-    margin: $slider_margin;
-  }
-
   // click-and-hold the slider to activate
   &.fine-tune {
     &.horizontal {
@@ -2607,6 +2600,9 @@ scale {
   }
 
   slider {
+    min-height: $slider_size;
+    min-width: $slider_size;
+    margin: $slider_margin;
     transition: all $duration $ease-out;
     border-radius: $circular-radius;
     color: $primary;
@@ -2629,29 +2625,48 @@ scale {
   marks,
   value { color: $text-secondary; }
 
+  &.marks-before:not(.marks-after),
+  &.marks-after:not(.marks-before) {
+    slider {
+      min-height: 24px;
+      min-width: 24px;
+      margin: -(24px - $trough_size) / 2;
+      background-color: transparent;
+      box-shadow: none;
+      color: $primary;
+
+      &:hover {
+        box-shadow: 0 0 0 4px $divider;
+        background-color: $divider;
+      }
+
+      &:active {
+        box-shadow: 0 0 0 6px $divider;
+        background-color: $divider;
+      }
+
+      &:disabled {
+        color: mix($primary, $background, 50%);
+      }
+    }
+  }
+
+  @each $dir_class, $dir_infix in ('horizontal', 'horz'),
+                                  ('vertical', 'vert') {
+    @each $marks_infix, $marks_class in ('marks-before', 'marks-before:not(.marks-after)'),
+                                        ('marks-after', 'marks-after:not(.marks-before)') {
+      &.#{$dir_class}.#{$marks_class} {
+        slider {
+          $_scale_asset: 'assets/scale-#{$dir_infix}-#{$marks_infix}-slider-symbolic';
+          -gtk-icon-source: -gtk-recolor(url("#{$_scale_asset}.svg"));
+        }
+      }
+    }
+  }
+
   indicator {
     background-color: $track;
     color: transparent;
-  }
-
-  //marks margins
-  @each $scale_orient, $marks_class, $marks_pos, $marks_margin in (horizontal, top, top, bottom),
-                                                                  (horizontal, bottom, bottom, top),
-                                                                  (vertical, top, left, right),
-                                                                  (vertical, bottom, right, left) {
-    &.#{$scale_orient} marks {
-      &.#{$marks_class} {
-        margin-#{$marks_margin}: $_marks_distance;
-        margin-#{$marks_pos}: -($_marks_distance + $_marks_length);
-      }
-    }
-
-    &.#{$scale_orient}.fine-tune marks {
-      &.#{$marks_class} {
-        margin-#{$marks_margin}: $_marks_distance - 1px;
-        margin-#{$marks_pos}: -($_marks_distance + $_marks_length - 1px);
-      }
-    }
   }
 
   &.horizontal {
@@ -2665,66 +2680,6 @@ scale {
     indicator {
       min-height: 1px;
       min-width: $_marks_length;
-    }
-  }
-
-  // *WARNING* scale with marks madness following
-
-  @each $dir_class, $dir_infix in ('horizontal', 'horz'),
-                                  ('vertical', 'vert') {
-    @each $marks_infix, $marks_class in ('marks-before', 'marks-before:not(.marks-after)'),
-                                        ('marks-after', 'marks-after:not(.marks-before)') {
-      &.#{$dir_class}.#{$marks_class} {
-        slider {
-          transition: background-color $duration $ease-out,
-                      background-size $ripple-fade-out-duration $ease-out,
-                      background-image $ripple-fade-out-opacity-duration $ease-out;
-          min-height: 32px;
-          min-width: 32px;
-          margin: -15px;
-          border-radius: 50%;
-          background-size: auto, 1000% 1000%;
-          background-repeat: no-repeat;
-          background-position: center center;
-          background-color: transparent;
-
-          &, &:hover, &:active, &:disabled {
-            box-shadow: none;
-          }
-
-          &:focus { background-color: $overlay-focus; }
-
-          &:hover { background-color: $overlay-hover; }
-
-          &:focus:hover { background-color: $overlay-focus-hover; }
-
-          &:active {
-            transition: background-color $duration $ease-out,
-                        background-size 0ms,
-                        background-image 0ms;
-            animation: ripple-on-slider $ripple-fade-in-duration $ease-out forwards;
-            background-size: auto, 0% 0%;
-            background-color: $overlay-hover;
-          }
-
-          @each $state, $state_infix in ('', ''),
-                                        (':disabled', '-disabled') {
-            &#{$state} {
-              $_scale_asset: 'assets/scale-#{$dir_infix}-#{$marks_infix}-slider#{$state_infix}#{$asset-suffix}';
-
-              background-image: -gtk-scaled(url('#{$_scale_asset}.png'), url('#{$_scale_asset}@2.png')),
-                                radial-gradient(circle, transparent 10%, transparent 0%);
-            }
-          }
-
-          &:active {
-            $_scale_asset: 'assets/scale-#{$dir_infix}-#{$marks_infix}-slider#{$asset-suffix}';
-
-            background-image: -gtk-scaled(url('#{$_scale_asset}.png'), url('#{$_scale_asset}@2.png')),
-                              radial-gradient(circle, $overlay-active 10%, transparent 0%);
-          }
-        }
-      }
     }
   }
 
