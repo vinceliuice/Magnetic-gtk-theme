@@ -13,7 +13,7 @@
   - `gtk2-engines-murrine` on Debian, Ubuntu, etc.
 - `sassc` — build dependency
 
-- `Icon theme` [Tele-circle](https://github.com/vinceliuice/Tele-circle-icon-theme)
+- `Icon theme` [Tela-circle](https://github.com/vinceliuice/Tela-circle-icon-theme)
 
 ## Donate
 
