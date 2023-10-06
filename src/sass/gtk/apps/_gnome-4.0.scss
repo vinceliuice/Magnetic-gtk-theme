@@ -613,8 +613,19 @@ menubutton stack > box {
 // Contacts
 //
 
-.contacts-contact-list list.navigation-sidebar {
-  background: none;
+leaflet.unfolded .contacts-contact-list {
+  > scrolledwindow {
+    @extend %sidebar_style;
+
+    > scrollbar {
+      @extend %sidebar_scrollbar;
+      @extend %round_scrollbar;
+    }
+
+    > viewport > .navigation-sidebar {
+      @extend %sidebar_list;
+    }
+  }
 }
 
 //
