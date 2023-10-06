@@ -130,7 +130,8 @@ window.background > widget > leaflet.unfolded {
   > box > scrolledwindow {
     @extend %sidebar_style;
 
-    > viewport > widget > stack {
+    > viewport > widget > stack,
+    > viewport > widget > stack > box {
       > .navigation-sidebar {
         @extend %sidebar_list;
       }
@@ -140,6 +141,8 @@ window.background > widget > leaflet.unfolded {
       @extend %sidebar_scrollbar;
       @extend %round_scrollbar;
     }
+
+    entry { @extend %sidebar_entry; }
   }
 }
 

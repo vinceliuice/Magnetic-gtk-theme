@@ -554,11 +554,6 @@ frame.gedit-map-frame > border {
   }
 }
 
-.tweak-categories {
-  @extend %sidebar_style;
-  @extend %sidebar_list;
-}
-
 .tweak {
   padding: 3px;
 
@@ -602,18 +597,18 @@ hdyleaflet.titlebar > .titlebar.tweak-titlebar-right { // Workaround for gnome-t
   transition: color $duration $ease-out;
 }
 
-// 45.0
 leaflet.unfolded {
   > box.vertical:first-child > scrolledwindow > viewport.frame {
     @extend %sidebar_style;
 
-    > list.navigation-sidebar {
+    > list {
       background-color: transparent;
       @extend %sidebar_list;
     }
   }
 
-  > box.vertical:last-child > scrolledwindow > viewport.frame {
+  > box.vertical:last-child > scrolledwindow > viewport.frame,
+  > box.vertical:last-child > stack > scrolledwindow > viewport.frame {
     @extend %content_style;
   }
 }

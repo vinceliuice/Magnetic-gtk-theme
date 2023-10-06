@@ -368,6 +368,10 @@ overlay-split-view {
   color: on($indicator);
   border-radius: $corner-radius;
   margin: $space-size;
+
+  .dim-label {
+    color: on($indicator, disabled);
+  }
 }
 
 %sidebar_scrollbar {
@@ -424,9 +428,25 @@ overlay-split-view {
       }
     }
   }
+}
 
-  .dim-label {
-    color: on($indicator, disabled);
+%sidebar_entry {
+  background-color: if($variant == 'light', on($indicator, secondary-fill), on($indicator, fill));
+  color: on($indicator, secondary);
+  border-radius: $corner-radius - $space-size;
+
+  &:focus-within { color: on($indicator); }
+
+  &:drop(active), &:hover:not(:focus-within) { color: on($indicator); }
+
+  &:disabled { color: on($indicator, secondary-disabled); }
+
+  image { // icons inside the entry
+    color: on($indicator, secondary);
+
+    &:hover, &:active { color: on($indicator); }
+
+    &:disabled { color: on($indicator, secondary-disabled); }
   }
 }
 

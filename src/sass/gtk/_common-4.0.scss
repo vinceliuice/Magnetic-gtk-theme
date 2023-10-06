@@ -3583,6 +3583,10 @@ list {
   &.separators:not(.horizontal) > row:not(.separator):not(:last-child) {
     border-bottom: 1px solid $border;
   }
+
+  leaflet scrolledwindow & {
+    background-color: transparent;
+  }
 }
 
 list.frame { border-radius: $corner-radius; }
