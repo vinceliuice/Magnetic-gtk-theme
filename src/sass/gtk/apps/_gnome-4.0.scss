@@ -7,6 +7,23 @@
     background-color: $background;
   }
 
+  placessidebar {
+    > scrolledwindow {
+      @extend %sidebar_style;
+
+      > scrollbar {
+        @extend %sidebar_scrollbar;
+        @extend %round_scrollbar;
+      }
+
+      > viewport > .navigation-sidebar {
+        @extend %sidebar_list;
+      }
+    }
+  }
+
+  flap > separator { background-color: transparent; }
+
   placesview {
     label { color: $text-secondary; }
   }
@@ -109,6 +126,23 @@
 // Gnome Control Center
 //
 
+window.background > widget > leaflet.unfolded {
+  > box > scrolledwindow {
+    @extend %sidebar_style;
+
+    > viewport > widget > stack {
+      > .navigation-sidebar {
+        @extend %sidebar_list;
+      }
+    }
+
+    > scrollbar {
+      @extend %sidebar_scrollbar;
+      @extend %round_scrollbar;
+    }
+  }
+}
+
 window.dialog {
   > box > stack > box > box {
     > notebook.frame {
@@ -187,8 +221,15 @@ label {
   }
 }
 
+toastoverlay {
+  datechooser.view, agenda-view.view, agenda-view.view list, stack.view {
+    background-color: transparent;
+  }
+}
+
 calendar-view {
   font-size: 10pt;
+  @extend %content_style;
 
   &:selected {
     color: $primary;

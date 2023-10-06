@@ -1468,11 +1468,8 @@ button.combo:only-child {
 searchbar > revealer > box {
   padding: $space-size;
   border-spacing: $space-size;
-  border-style: solid;
-  border-width: 0 0 1px;
-  border-color: $divider;
-  background-color: $background;
-  background-clip: border-box;
+  border: none;
+  background-color: transparent;
   box-shadow: none;
 
   entry, button, menubutton { margin: 0; }
@@ -1740,10 +1737,9 @@ headerbar {
     background-color: $titlebar-divider;
   }
 
-  // switch {
-  //   margin-top: ($large-size - $small-size) / 2;
-  //   margin-bottom: ($large-size - $small-size) / 2;
-  // }
+  switch {
+    margin: ($large-size - $small-size) / 2 $space-size;
+  }
 
   &.selection-mode {
     // 0.1ms was a workaround for https://gitlab.gnome.org/GNOME/gtk/issues/698
@@ -3484,11 +3480,7 @@ scrolledwindow {
 
 // vbox and hbox separators
 separator {
-  min-width: 1px;
-  min-height: 1px;
-  background-color: $divider;
-
-  &.spacer {
+  &, &.spacer {
     @extend %hide_separators;
   }
 }

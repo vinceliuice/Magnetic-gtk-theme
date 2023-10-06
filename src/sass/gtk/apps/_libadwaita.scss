@@ -503,7 +503,6 @@ overlay-split-view {
 
   .sidebar,
   toolbarview, // Control center
-  toolbarview > placessidebar, // Nautilus
   toolbarview > stack > box > widget > widget { //Contact
     > scrolledwindow {
       @extend %sidebar_style;
@@ -516,7 +515,6 @@ overlay-split-view {
   }
 
   .sidebar > scrolledwindow > viewport,
-  toolbarview > placessidebar > scrolledwindow > viewport,
   toolbarview > scrolledwindow > viewport > widget > stack,
   toolbarview > stack > box > widget > widget > scrolledwindow {
     > .navigation-sidebar {
