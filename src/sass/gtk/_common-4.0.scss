@@ -1145,7 +1145,7 @@ button.link {
 }
 
 .link selection {
-  @extend %selected_items;
+  @extend %selected_items_color;
 }
 
 /*****************

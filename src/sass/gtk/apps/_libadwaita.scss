@@ -98,28 +98,54 @@ toast {
 
 viewswitcher {
   margin: 0;
+  border-spacing: $space-size / 2;
 
   &.wide {
-    border-spacing: $space-size / 2;
+    button.toggle {
+      border-radius: $space-size / 2;
+
+      &:first-child {
+        border-top-left-radius: $medium-size / 2;
+        border-bottom-left-radius: $medium-size / 2;
+      }
+
+      &:last-child {
+        border-top-right-radius: $medium-size / 2;
+        border-bottom-right-radius: $medium-size / 2;
+      }
+    }
   }
 
-  &.narrow button.toggle {
-    border-radius: 0;
-    margin: 0;
+  &.narrow {
+    button.toggle {
+      border-radius: 0 0 $space-size / 2 $space-size / 2;
+      margin: 0;
 
-    &:focus-within, &:focus { box-shadow: none; }
+      &:first-child {
+        border-bottom-left-radius: $corner-radius;
+      }
+
+      &:last-child {
+        border-bottom-right-radius: $corner-radius;
+      }
+    }
   }
 
   button.toggle {
     font-weight: bold;
     padding: 0;
 
+    &:focus:not(:hover):not(:active) {
+      box-shadow: none;
+      outline: none;
+    }
+
     > stack > box {
       &.narrow {
         font-size: 0.75rem;
-        padding-top: $space-size;
+        padding-top: $space-size + 2px;
         padding-bottom: $space-size - 2px;
-        border-spacing: $space-size - 2px;
+        border-spacing: $space-size / 2;
 
         > stack > label {
           padding-left: $space-size;
@@ -138,6 +164,19 @@ viewswitcher {
 // AdwViewSwitcherBar
 viewswitcherbar actionbar > revealer > box {
   padding: 0;
+
+  viewswitcher.narrow button.toggle {
+    border-radius: $corner-radius;
+    margin: $space-size / 2 0;
+
+    > stack > box {
+      &.narrow {
+        padding-top: $space-size / 2 + 2px;
+        padding-bottom: $space-size / 2 - 2px;
+        border-spacing: 0;
+      }
+    }
+  }
 }
 
 // AdwViewSwitcherTitle
@@ -173,14 +212,6 @@ viewswitchertitle {
   windowtitle {
     margin-top: 0;
     margin-bottom: 0;
-  }
-
-  .top-bar headerbar & viewswitcher {
-    &.narrow {
-      button.toggle {
-        border-radius: 0 0 $corner-radius $corner-radius;
-      }
-    }
   }
 }
 
