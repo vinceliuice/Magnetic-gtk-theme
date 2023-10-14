@@ -3480,14 +3480,15 @@ scrolledwindow {
 
 // vbox and hbox separators
 separator {
+  min-width: 1px;
+  min-height: 1px;
+
   &, &.spacer {
     @extend %hide_separators;
   }
 }
 
 %hide_separators {
-  min-width: 0;
-  min-height: 0;
   background-color: transparent;
   background-image: none;
 }

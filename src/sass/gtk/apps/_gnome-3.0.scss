@@ -519,6 +519,10 @@ frame.gedit-map-frame > border {
         color: $text;
       }
     }
+
+    & + row {
+      margin-top: $space-size / 2;
+    }
   }
 }
 
@@ -604,6 +608,7 @@ leaflet.unfolded {
     > list {
       background-color: transparent;
       @extend %sidebar_list;
+      margin: 0;
     }
   }
 
