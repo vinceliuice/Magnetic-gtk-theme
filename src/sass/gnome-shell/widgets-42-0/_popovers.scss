@@ -29,6 +29,14 @@
   }
 }
 
+// container for radio and check boxes
+.popup-menu-ornament {
+  width: 1.2em;
+
+  &:ltr { text-align: right; }
+  &:rtl { text-align: left; }
+}
+
 // system status popover menu
 .aggregate-menu {
   .popup-sub-menu .popup-menu-item > :first-child {

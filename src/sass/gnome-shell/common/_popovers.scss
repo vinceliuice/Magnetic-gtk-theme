@@ -123,14 +123,6 @@
 .popup-menu-arrow,
 .popup-menu-icon { icon-size: $base_icon_size; }
 
-// container for radio and check boxes
-.popup-menu-ornament {
-  width: 1.2em;
-
-  &:ltr { text-align: right; }
-  &:rtl { text-align: left; }
-}
-
 .popup-ornamented-menu-item {
   &:ltr { padding-left: $base_padding; }
   &:rtl { padding-right: $base_padding; }

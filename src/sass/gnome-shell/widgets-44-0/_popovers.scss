@@ -1,7 +1,7 @@
 
 .popup-menu {
   .popup-menu-item {
-    padding: $base_padding $base_padding * 2 !important;
+    padding: $base_padding $base_padding * 2;
   }
 }
 
@@ -26,10 +26,16 @@
   }
 }
 
-// system status popover menu
-.aggregate-menu {
-  .popup-sub-menu .popup-menu-item > :first-child {
-    &:ltr { padding-left: $base_padding * 2 !important; margin-left: 0 !important; }
-    &:rtl { padding-right: $base_padding * 2 !important; margin-right: 0 !important; }
-  }
+// container for radio and check boxes
+.popup-menu-ornament {
+  icon-size: $base_icon_size !important;
+  width: $base_icon_size;
 }
+
+// system status popover menu
+// .aggregate-menu {
+//   .popup-sub-menu .popup-menu-item > :first-child {
+//     &:ltr { padding-left: $base_padding * 2 !important; margin-left: 0 !important; }
+//     &:rtl { padding-right: $base_padding * 2 !important; margin-right: 0 !important; }
+//   }
+// }
