@@ -917,12 +917,14 @@ splitbutton {
 
   &, & > separator {
     transition: $transition;
-    transition-property: background;
+    transition-property: background-color;
   }
 
   > separator {
+    min-width: 0;
     margin-top: $space-size;
     margin-bottom: $space-size;
+    background-color: transparent;
     background: none;
   }
 
@@ -1675,7 +1677,7 @@ headerbar {
     }
 
     > separator {
-      background: none;
+      background-color: transparent;
     }
   }
 
@@ -3482,13 +3484,16 @@ scrolledwindow {
 separator {
   min-width: 1px;
   min-height: 1px;
+  background-color: transparent;
 
-  &, &.spacer {
+  &.spacer, &.sidebar {
     @extend %hide_separators;
   }
 }
 
 %hide_separators {
+  min-width: 0;
+  min-height: 0;
   background-color: transparent;
   background-image: none;
 }

@@ -1659,8 +1659,8 @@ treeview.view {
     button {
       @extend %row_activatable;
       padding: 2px $space-size;
-      border-style: none solid none none;
-      border-width: 1px;
+      border: none;
+      border-right: 1px solid transparent;
       border-color: $divider;
       border-radius: 0;
       background-clip: border-box;
@@ -1674,7 +1674,10 @@ treeview.view {
 
       &, &:disabled { background-color: $base; }
 
-      &:last-child { border-right-style: none; }
+      &:last-child {
+        border-right: none;
+        border-image: none;
+      }
     }
   }
 
