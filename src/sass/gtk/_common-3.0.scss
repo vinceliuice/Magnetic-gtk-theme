@@ -2025,6 +2025,7 @@ notebook {
   background-color: $card;
 
   &.frame {
+    border: none;
     border-radius: $modal-radius + $space-size;
 
     scrolledwindow.frame {
