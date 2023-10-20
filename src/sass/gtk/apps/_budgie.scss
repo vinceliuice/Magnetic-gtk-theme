@@ -28,16 +28,12 @@
 
 // Budgie popover
 .budgie-popover {
-  @if $rimless == 'true' {
+  @if $outline == 'false' {
     border: none;
     box-shadow: $shadow-z4;
-  } @else if $variant == 'dark' {
-    border: 1px solid highlight($surface);
-    box-shadow: $shadow-z4, 0 0 0 1px $window-border;
-    background-clip: border-box;
   } @else {
     border-color: $popover;
-    box-shadow: $shadow-z4, 0 0 0 1px $border;
+    box-shadow: $shadow-z4, 0 0 0 2px $indicator;
     background-clip: border-box;
   }
 
@@ -143,16 +139,12 @@
       background-color: $base;
       padding: $space-size;
       margin: $space-size;
+      border: none;
 
-      @if $rimless == 'true' {
-        border: none;
+      @if $outline == 'false' {
         box-shadow: $shadow-z4;
-      } @else if $variant == 'dark' {
-        border: 1px solid highlight($surface);
-        box-shadow: $shadow-z4, 0 0 0 1px $window-border;
-        background-clip: border-box;
       } @else {
-        box-shadow: $shadow-z4, 0 0 0 1px $border;
+        box-shadow: $shadow-z4, 0 0 0 2px $indicator;
       }
 
       > row.activatable {

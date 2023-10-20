@@ -56,9 +56,8 @@
   padding: $base_padding * 2;
   background-color: $osd;
 
-  @if $rimless == 'false' {
-    border: 1px solid black;
-    box-shadow: inset 0 0 0 1px highlight($osd);
+  @if $outline == 'true' {
+    border: 2px solid $inverse-indicator;
   }
 
   & .folder-name-container {

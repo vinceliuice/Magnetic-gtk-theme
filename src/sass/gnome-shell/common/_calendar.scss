@@ -131,24 +131,29 @@
     &:active { background-color: $track; }
   }
 
+  .calendar-day,
   .calendar-day-base {
     @include fontsize($font_size - 1);
     text-align: center;
-    width: $item_size + 2px;
-    height: $item_size + 2px;
-    padding: 0;
-    margin: 2px;
+    width: $item_size + 2px !important;
+    height: $item_size + 2px !important;
+    padding: 0 !important;
+    margin: 2px !important;
     border-radius: $circular_radius;
     color: $text-secondary;
     border: none;
     font-feature-settings: "tnum";
 
-    &:hover, &:focus { background-color: $divider; }
+    &:hover, &:focus {
+      background-color: $divider;
+      box-shadow: none !important;
+    }
 
     &:active, &:selected {
       color: $text;
       background-color: $track;
       border-color: transparent; //avoid jumparound due to today
+      box-shadow: none !important;
     }
 
     &.calendar-day-heading {  //day of week heading
@@ -185,16 +190,19 @@
     &:hover, &:focus {
       background-color: overlay($base, hover);
       color: $text !important;
+      box-shadow: none !important;
     }
 
     &:active {
       background-color: darken($primary, 5%);
       color: on($primary) !important;
+      box-shadow: none !important;
     }
 
     &:selected {
       background-color: $primary;
       color: on($primary) !important;
+      box-shadow: none !important;
 
       &:hover, &:focus {
         background-color: lighten($primary, 8%);
@@ -213,9 +221,10 @@
     }
   }
 
+  .calendar-other-month,
   .calendar-other-month-day {
-    color: $text-secondary-disabled;
-    opacity: 0.5;
+    color: $text-secondary-disabled !important;
+    opacity: 1;
   }
 
   .calendar-week-number {

@@ -66,7 +66,8 @@ OPTIONS:
   --tweaks                Specify versions for tweaks
                           1. [nord|dracula|gruvbox]   Nord|Dracula|gruvbox ColorSchemes version
                           2. black                    Blackness color version
-                          5. float                    Floating gnome-shell panel style
+                          3. float                    Floating gnome-shell panel style
+                          4. outline                  Windows with 2px outline style
 
   -h, --help              Show help
 EOF
@@ -339,6 +340,11 @@ while [[ $# -gt 0 ]]; do
             echo -e "Install Floating Gnome-Shell Panel version! ..."
             shift
             ;;
+          outline)
+            outline="true"
+            echo -e "Install 2px windows outline version! ..."
+            shift
+            ;;
           -*)
             break
             ;;
@@ -385,7 +391,7 @@ function has_command() {
 
 #  Install needed packages
 install_package() {
-  if [ ! "$(which sassc 2> /dev/null)" ]; then
+  if ! has_command sassc; then
     echo sassc needs to be installed to generate the css.
     if has_command zypper; then
       sudo zypper in sassc
@@ -430,6 +436,10 @@ blackness_color() {
 
 float_panel() {
   sed -i "/\$float:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
+}
+
+outline_style() {
+  sed -i "/\$outline:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
 }
 
 gnome_shell_version() {
@@ -502,6 +512,10 @@ theme_tweaks() {
 
   if [[ "$float" = "true" ]] ; then
     float_panel
+  fi
+
+  if [[ "$outline" = "true" ]] ; then
+    outline_style
   fi
 }
 

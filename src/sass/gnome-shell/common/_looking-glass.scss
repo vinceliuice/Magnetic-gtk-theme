@@ -10,9 +10,9 @@
   box-shadow: 0 3px 8px 0 rgba(black, 0.25);
   color: $text;
 
-  @if $rimless == 'false' {
-    border: 1px solid $window-border;
-  } @else { border: none; }
+  @if $outline == 'true' {
+    border: 2px solid $indicator;
+  }
 
   & > #Toolbar {
     padding: 0 $base_padding;

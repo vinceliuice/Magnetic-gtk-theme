@@ -48,7 +48,8 @@ Run the following commands in the terminal:
 --tweaks                Specify versions for tweaks
                         1. [nord|dracula|gruvbox]   Nord|Dracula|gruvbox ColorSchemes version
                         2. black                    Blackness color version
-                        5. float                    Floating gnome-shell panel style
+                        3. float                    Floating gnome-shell panel style
+                        4. outline                  Windows with 2px outline style
 
 -h, --help              Show help
 ```

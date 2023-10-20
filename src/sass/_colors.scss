@@ -151,7 +151,7 @@ $primary:                               theme(color);
 $drop_target_color:                     $orange-dark;
 $indicator:                             if($variant == 'dark', mix($primary, background(b), 15%), mix($primary, background(e), 15%));
 $titlebar-indicator:                    if($variant == 'dark', currentColor, $primary);
-$inverse-indicator:                     if($theme == 'grey', $white, $primary);
+$inverse-indicator:                     mix($primary, $white, 15%);
 $applet-primary:                        if($theme == 'grey' and variant == 'light' and $topbar == 'dark', $grey-200, $primary);
 
 $background:                            if($variant == 'light', mix($primary, background(a), 15%), mix($primary, background(g), 10%));

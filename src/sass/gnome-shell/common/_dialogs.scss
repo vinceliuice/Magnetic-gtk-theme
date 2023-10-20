@@ -3,13 +3,10 @@
 %theme_dialogs {
   background-color: $popover;
   border-radius: $modal_radius + $base_padding / 2;
+  box-shadow: 0 3px 6px rgba(black, 0.35);
 
-  @if $rimless == 'false' {
-    border: 1px solid $window-border;
-    box-shadow: inset 0 0 0 1px highlight($popover);
-  } @else {
-    border: none;
-    box-shadow: 0 3px 6px rgba(black, 0.35);
+  @if $outline == 'true' {
+    border: 2px solid $indicator;
   }
 }
 

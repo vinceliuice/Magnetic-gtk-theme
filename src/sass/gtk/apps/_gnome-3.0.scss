@@ -408,10 +408,10 @@ window.org-gnome-gedit {
   background-color: $surface;
   border-radius: 0 0 $menu-radius $menu-radius;
 
-  @if $rimless == 'true' {
+  @if $outline == 'false' {
     box-shadow: $shadow-z5;
   } @else {
-    box-shadow: $shadow-z5, 0 0 0 1px $window-border;
+    box-shadow: $shadow-z5, 0 0 0 2px $indicator;
   }
 
   .linked:not(.vertical) > entry {

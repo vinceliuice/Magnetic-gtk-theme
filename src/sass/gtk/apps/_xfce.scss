@@ -94,10 +94,10 @@ window#whiskermenu-window {
     border: none;
     background-color: $popover;
 
-    @if $rimless == 'true' {
+    @if $outline == 'false' {
       box-shadow: $shadow-z4, inset 0 1px highlight($popover);
     } @else {
-      box-shadow: $shadow-z4, 0 0 0 1px $window-border, inset 0 0 0 1px highlight($popover);
+      box-shadow: $shadow-z4, 0 0 0 2px $indicator;
     }
   }
 
@@ -144,12 +144,11 @@ window#whiskermenu-window {
   background-color: $base;
   border-radius: $window-radius;
 
-  @if $rimless == 'true' {
+  @if $outline == 'false' {
     border: none;
     box-shadow: none;
   } @else {
-    border: 1px solid $window-border;
-    box-shadow: inset 0 0 0 1px highlight($base);
+    border: 2px solid $indicator;
   }
 
   buttonbox { padding: 0; }
@@ -161,12 +160,11 @@ dialog.xfsm-logout-dialog {
   border-radius: $window-radius;
   background-color: if($opacity == 'solid', $popover, rgba($popover, 0.97));
 
-  @if $rimless == 'true' {
+  @if $outline == 'false' {
     border: none;
     box-shadow: none;
   } @else {
-    border: 1px solid $window-border;
-    box-shadow: inset 0 0 0 1px highlight($base);
+    border: 2px solid $indicator;
   }
 }
 

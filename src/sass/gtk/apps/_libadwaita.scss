@@ -552,9 +552,12 @@ overlay-split-view {
     border: none;
   }
 
+  .navigation-sidebar {
+    @extend %sidebar_list;
+  }
+
   .sidebar,
-  toolbarview, // Control center
-  toolbarview > stack > box > widget > widget { //Contact
+  toolbarview {
     > scrolledwindow {
       @extend %sidebar_style;
 
@@ -562,14 +565,6 @@ overlay-split-view {
         @extend %sidebar_scrollbar;
         @extend %round_scrollbar;
       }
-    }
-  }
-
-  .sidebar > scrolledwindow > viewport,
-  toolbarview > scrolledwindow > viewport > widget > stack,
-  toolbarview > stack > box > widget > widget > scrolledwindow {
-    > .navigation-sidebar {
-      @extend %sidebar_list;
     }
   }
 }

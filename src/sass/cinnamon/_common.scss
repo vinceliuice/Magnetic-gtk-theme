@@ -273,8 +273,8 @@ $menu_item_radius: $corner-radius;
   margin: $space-size;
   box-shadow: none;
 
-  @if $rimless == 'false' and  $variant == 'dark' {
-    border: 1px solid $window-border;
+  @if $outline == 'true' {
+    border: 2px solid $indicator;
   }
 
   &-arrow { icon-size: 16px; }
@@ -303,8 +303,8 @@ $menu_item_radius: $corner-radius;
     background-color: $popover;
     box-shadow: 0 5px 12px rgba(black, 0.35);
 
-    @if $rimless == 'false' and $variant == 'dark' {
-      border: 1px solid highlight($popover);
+    @if $outline == 'true' {
+      border: 2px solid $indicator;
       background-clip: border-box;
     }
   }
@@ -1656,8 +1656,8 @@ $menu_item_radius: $corner-radius;
     background-clip: border-box;
     box-shadow: 0 5px 12px rgba(black, 0.35);
 
-    @if $rimless == 'false' and $variant == 'dark' {
-      border: 1px solid $window-border;
+    @if $outline == 'true' {
+      border: 2px solid $indicator;
     }
 
     .item-box {
