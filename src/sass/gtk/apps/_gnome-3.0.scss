@@ -1644,6 +1644,7 @@ terminal-window {
         min-height: $small-size;
         min-width: $small-size;
         padding: $space-size / 2;
+        border-radius: $modal-radius;
       }
     }
   }
@@ -1662,16 +1663,11 @@ window.background { // gnome-terminal 3.32 setting
         background-color: $indicator;
         color: on($indicator);
 
-        button.flat { @extend %button-on-dark; }
+        button.flat { @extend %flat-button-on-indicator; }
 
         > row {
           &, &:hover, &:active, &:selected {
             color: on($indicator);
-          }
-
-          &:selected {
-            image,
-            label { color: on($indicator); }
           }
         }
       }

@@ -3089,16 +3089,12 @@ row {
   &:selected {
     color: inherit; // for overlays
     background-color: $overlay-selected;
+    color: $text;
 
-    image,
-    label { color: $text; }
-
-    button image,
-    button label { color: inherit; }
+    button { color: inherit; }
 
     &:disabled {
-      image,
-      label { color: $text-disabled; }
+      color: $text-disabled;
     }
   }
 }
@@ -3196,6 +3192,8 @@ messagedialog { // Message Dialog styling
     background-color: $surface;
 
     .titlebar {
+      min-height: $window-radius;
+
       &, &:backdrop {
         background-color: $surface;
       }
