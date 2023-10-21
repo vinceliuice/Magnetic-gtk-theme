@@ -7,21 +7,6 @@
     background-color: $background;
   }
 
-  placessidebar {
-    > scrolledwindow {
-      @extend %sidebar_style;
-
-      > scrollbar {
-        @extend %sidebar_scrollbar;
-        @extend %round_scrollbar;
-      }
-
-      > viewport > .navigation-sidebar {
-        @extend %sidebar_list;
-      }
-    }
-  }
-
   flap > separator { background-color: transparent; }
 
   placesview {

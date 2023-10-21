@@ -1115,6 +1115,7 @@ toolbar {
   border-width: 0 1px 1px;
   border-color: $divider;
   background-color: $base-alt;
+  border-radius: 0 0 $modal-radius $modal-radius;
 
   .frame & {
     border-width: 1px 0 0;
@@ -1604,6 +1605,7 @@ treeview.view {
   }
 
   &.expander {
+    color: $text-secondary;
     -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
     -gtk-icon-transform: rotate(-90deg);
 
@@ -1611,11 +1613,17 @@ treeview.view {
 
     &:checked { -gtk-icon-transform: unset; }
 
-    color: $text-secondary;
-
     &:hover, &:active { color: $text; }
 
     &:disabled { color: $text-secondary-disabled; }
+
+    &:selected {
+      color: on($indicator, secondary);
+
+      &:hover, &:active { color: on($indicator); }
+
+      &:disabled { color: on($indicator, secondary-disabled); }
+    }
   }
 
   &.progressbar { // progress bar in treeviews
@@ -2023,6 +2031,10 @@ modelbutton.flat arrow {
 
 notebook {
   background-color: $card;
+
+  window.background > & {
+    background-color: transparent;
+  }
 
   &.frame {
     border: none;
@@ -2492,23 +2504,20 @@ treeview.view {
   radio, check {
     padding: 0;
     margin: 0;
-
-    &:not(:disabled):not(:checked):not(:indeterminate) {
-      background-color: $divider;
-    }
+    background-color: $divider;
 
     &, &:hover, &:disabled, &:checked:hover, &:indeterminate:hover {
       box-shadow: none;
     }
-  }
 
-  &, &:hover, &:selected {
-    radio, check {
-      &:checked, &:indeterminate {
-        background-color: $assets-color;
-        color: on($assets-color);
-        background-image: none;
-      }
+    &:selected:not(:disabled):not(:checked):not(:indeterminate) {
+      background-color: on($indicator, divider);
+    }
+
+    &:checked, &:indeterminate {
+      background-color: $assets-color;
+      color: on($assets-color);
+      background-image: none;
     }
   }
 }

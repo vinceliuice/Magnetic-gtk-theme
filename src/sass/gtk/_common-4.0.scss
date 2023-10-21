@@ -955,14 +955,14 @@ splitbutton {
   > menubutton > button:dir(rtl) {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    margin-right: -1px;
+    margin-right: 0;
   }
 
   > button:dir(rtl),
   > menubutton > button:dir(ltr) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    margin-left: -1px;
+    margin-left: 0;
   }
 
   @at-root %flat_split_button,
@@ -1050,6 +1050,16 @@ buttoncontent {
   }
 }
 
+button.color {
+  min-height: $small-size;
+  min-width: $small-size;
+  padding: $space-size;
+
+  // colorswatch:only-child {
+  //   &, overlay { border-radius: 0; }
+  // }
+}
+
 %needs-attention {
   animation: needs-attention $ripple-fade-in-duration $ease-out forwards;
   background-repeat: no-repeat;
@@ -1095,14 +1105,55 @@ buttoncontent {
   }
 }
 
-button.color {
-  min-height: $small-size;
-  min-width: $small-size;
-  padding: $space-size;
+// .linked >                  element            child
+$deprecated_linked_widgets: ("combobox",         "> box > button.combo"),
+                            ("appchooserbutton", "> combobox > box > button.combo");
 
-  // colorswatch:only-child {
-  //   &, overlay { border-radius: 0; }
-  // }
+// .linked >        element       child
+$_linked_widgets: ("%button",     ""),
+                  ("button",      ""),
+                  ("menubutton",  "> button"),
+                  ("dropdown",    "> button"),
+                  ("colorbutton", "> button"),
+                  ("fontbutton",  "> button"),
+                  ("tabbutton",   "> button"),
+                  ("%entry",      ""),
+                  ("entry",       "");
+
+$_linked_widgets: join($_linked_widgets, $deprecated_linked_widgets);
+
+@each $widget, $child in $_linked_widgets {
+  .linked:not(.vertical) > {
+    #{$widget} {
+      &:dir(ltr):not(:first-child) #{$child},
+      &:dir(rtl):not(:last-child) #{$child} {
+        border-top-left-radius: $space-size / 2;
+        border-bottom-left-radius: $space-size / 2;
+        margin-left: 1px;
+      }
+
+      &:dir(ltr):not(:last-child) #{$child},
+      &:dir(rtl):not(:first-child) #{$child} {
+        border-top-right-radius: $space-size / 2;
+        border-bottom-right-radius: $space-size / 2;
+      }
+    }
+  }
+
+  .linked.vertical {
+    #{$widget} {
+      &:not(:first-child) #{$child} {
+        border-top-left-radius: $space-size / 2;
+        border-top-right-radius: $space-size / 2;
+        margin-top: 1px;
+      }
+
+      &:not(:last-child) #{$child} {
+        border-bottom-left-radius: $space-size / 2;
+        border-bottom-right-radius: $space-size / 2;
+      }
+    }
+  }
 }
 
 %list_button,
@@ -1391,6 +1442,10 @@ button.combo:only-child {
 
   button { @extend %button-flat; }
 
+  .linked button:not(:hover):not(:active):not(:checked):not(:disabled) {
+    background-color: $fill;
+  }
+
   // on OSD
   .osd & { background-color: transparent; }
 
@@ -1398,10 +1453,11 @@ button.combo:only-child {
   @at-root %toolbar_osd, &.osd {
     transition: $transition-shadow;
     padding: $space-size;
-    border-radius: $corner-radius + $space-size;
-    box-shadow: $shadow-z4, inset 0 1px highlight($surface);
+    border-radius: $corner-radius;
+    box-shadow: $shadow-z5, inset 0 1px highlight($surface);
     background-color: $surface;
     color: $text;
+    border: none;
 
     &:backdrop { box-shadow: $shadow-z2, inset 0 1px highlight($surface); }
 
@@ -1424,6 +1480,13 @@ button.combo:only-child {
   // toolbar separators
   &.horizontal > separator { margin: 2px; }
   &.vertical > separator { margin: 2px; }
+
+  entry,
+  splitbutton,
+  button,
+  scalebutton {
+    border-radius: $modal-radius;
+  }
 
   // add vertical margins to common widgets on toolbars to avoid them spanning
   // the whole height
@@ -1974,17 +2037,25 @@ treeview.view {
       @extend %row_activatable;
 
       padding: 2px 6px;
-      border-style: none solid solid none;
-      border-width: 1px;
-      border-color: $divider;
+      border-style: solid;
+      border-width: 0 1px 0 0;
+      border-color: transparent;
       border-radius: 0;
       background-clip: border-box;
+      border-image: linear-gradient(to bottom,
+                                    transparent 20%,
+                                    $border 20%,
+                                    $border 80%,
+                                    transparent 80%) 0 1 0 0 / 0 1px 0 0 stretch;
 
       &:not(:focus):not(:hover):not(:active) { color: $text-secondary; }
 
-      &, &:disabled { background-color: $base; }
+      &, &:disabled { background-color: transparent; }
 
-      &:last-child { border-right-style: none; }
+      &:last-child, &:only-child {
+        border-right: none;
+        border-image: none;
+      }
     }
   }
 
@@ -3425,19 +3496,24 @@ frame {
   statusbar & > border { border: none; } // for backward compatibility
 }
 
-actionbar > revealer > box {
-  padding: $space-size;
-  border-spacing: $space-size;
-  box-shadow: inset 0 1px $border;
-  background-color: $base;
-  background-clip: border-box;
-  border: none;
+actionbar {
+  box-shadow: none;
 
-  button, entry,
-  menubutton, menubutton > button,
-  splitbutton, splitbutton > button,
-  spinbutton {
-    margin: 0;
+  > revealer > box {
+    padding: $space-size;
+    border-spacing: $space-size;
+    box-shadow: none;
+    background-color: $base;
+    background-clip: border-box;
+    border: none;
+    color: $text;
+  
+    button, entry,
+    menubutton, menubutton > button,
+    splitbutton, splitbutton > button,
+    spinbutton {
+      margin: 0;
+    }
   }
 }
 
@@ -4263,33 +4339,6 @@ window.messagedialog {
   }
 }
 
-filechooser {
-  .dialog-action-box { border-top: 1px solid $divider; }
-
-  #pathbarbox {
-    border-bottom: 1px solid $divider;
-    background-color: $background;
-
-    > stack > box > button { // The new folder button
-      @extend %button-flat;
-      @extend %circular-button;
-    }
-  }
-
-  stack.view {
-    frame > border { border: none; }
-  }
-}
-
-filechooserbutton > button > box {
-  border-spacing: $space-size;
-}
-
-filechooserbutton:drop(active) {
-  box-shadow: none;
-  border-color: transparent;
-}
-
 
 /***********
  * Sidebar *
@@ -4381,11 +4430,70 @@ separator.sidebar {
 /****************
  * File chooser *
  ****************/
+
+filechooser {
+  paned {
+    > separator {
+      background: none;
+    }
+
+    > box {
+      @extend %content_style;
+
+      #pathbarbox.view, stack.view, columnview.view, gridview.view {
+        background-color: transparent;
+      }
+
+      scrolledwindow scrollbar {
+        @extend %round_scrollbar;
+      }
+    }
+  }
+
+  .dialog-action-box { border: none; }
+
+  #pathbarbox {
+    border: none;
+    background-color: transparent;
+
+    > stack > box > button { // The new folder button
+      @extend %button-flat;
+      @extend %circular-button;
+    }
+  }
+
+  stack.view {
+    frame > border { border: none; }
+  }
+}
+
+filechooserbutton > button > box {
+  border-spacing: $space-size;
+}
+
+filechooserbutton:drop(active) {
+  box-shadow: none;
+  border-color: transparent;
+}
+
 // dim the sidebar icons, see bug #786613 for details on this oddity
 placessidebar {
+  background-color: transparent;
+
   > viewport.frame { border-style: none; }
 
+  > scrolledwindow {
+    @extend %sidebar_style;
+
+    > scrollbar {
+      @extend %sidebar_scrollbar;
+      @extend %round_scrollbar;
+    }
+  }
+
   list.navigation-sidebar {
+    @extend %sidebar_list;
+
     > row {
       image.sidebar-icon {
         color: inherit;
