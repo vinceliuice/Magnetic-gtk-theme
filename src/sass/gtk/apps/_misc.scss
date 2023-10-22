@@ -331,6 +331,11 @@ scrolledwindow#DialogNotebook {
   }
 }
 
+#InKscapeCanvas { // Not use ?
+  background-color: $card;
+  border-radius: $corner-radius;
+}
+
 
 /***********
  * Synapse *

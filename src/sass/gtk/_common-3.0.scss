@@ -2375,6 +2375,26 @@ radiobutton.text-button {
   label:not(:only-child) { margin: 0 4px; }
 }
 
+%check-and-radio-on-indicator {
+  &:not(:checked):not(:indeterminate) {
+    background-color: on($indicator, divider);
+
+    &:hover {
+      box-shadow: 0 0 0 6px on($indicator, fill);
+      background-color: rgba(on($indicator), 0.15);
+    }
+  
+    &:active {
+      box-shadow: 0 0 0 6px on($indicator, divider);
+      background-color: rgba(on($indicator), 0.20);
+    }
+  
+    &:disabled {
+      background-color: on($indicator, fill);
+    }
+  }
+}
+
 check,
 radio {
   min-height: 20px;
@@ -2883,8 +2903,22 @@ actionbar > revealer > box {
   button {
     border-radius: $corner-radius - $space-size;
 
-    &:not(.suggested-action):not(.destructive-action) {
+    &:not(.suggested-action):not(.destructive-action):not(.combo) {
       @extend %button-on-indicator;
+    }
+
+    &.combo:only-child {
+      border-radius: $corner-radius - $space-size;
+      color: on($indicator, secondary);
+      background-color: on($indicator, fill);
+
+      &:hover, &:active {
+        color: on($indicator);
+      }
+
+      &:disabled {
+        color: on($indicator, secondary-disabled);
+      }
     }
   }
 
@@ -2907,6 +2941,10 @@ actionbar > revealer > box {
         }
       }
     }
+  }
+
+  check, radio {
+    @extend %check-and-radio-on-indicator;
   }
 }
 
@@ -3271,13 +3309,6 @@ filechooser {
 
     > placesview {
       background-color: transparent;
-      // border-bottom-right-radius: $window-radius;
-
-      > actionbar {
-        &, > revealer > box {
-          background-color: transparent;
-        }
-      }
     }
 
     frame > border { border: none; }
@@ -3286,12 +3317,6 @@ filechooser {
   .csd & placessidebar {
     background: none;
     border-bottom-left-radius: $window-radius;
-  }
-
-  actionbar {
-    &, > revealer > box {
-      background-color: transparent;
-    }
   }
 }
 
