@@ -71,6 +71,11 @@
 
   // .nemo-places-sidebar { }
 
+  paned > separator {
+    background-color: transparent;
+    background-image: none;
+  }
+
   paned > .sidebar {
     padding: 0;
     margin: $space-size 0 $space-size $space-size;
@@ -114,6 +119,12 @@
 
     > stack, scrolledwindow.view, scrolledwindow.view > widget.view {
       background-color: transparent;
+    }
+
+    scrolledwindow.view treeview.view {
+      &:not(:hover):not(:selected) {
+        background-color: transparent;
+      }
     }
 
     scrolledwindow scrollbar {

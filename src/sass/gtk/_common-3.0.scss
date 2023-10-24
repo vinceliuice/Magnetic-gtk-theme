@@ -1416,6 +1416,16 @@ searchbar > revealer > box {
       min-width: $small-size;
       margin: 0;
       padding: 0;
+
+      &.minimize, &.maximize, &.close {
+        &:active {
+          color: on($titlebar-indicator);
+          background-image: none;
+          animation: none;
+          box-shadow: none;
+          background-color: mix(on($titlebar-indicator), $titlebar-indicator, 25%);
+        }
+      }
     }
 
     .background.csd & {
@@ -3500,20 +3510,22 @@ placesview {
  *********/
 paned {
   > separator {
-    min-width: 0;
-    min-height: 0;
+    min-width: 1px;
+    min-height: 1px;
     -gtk-icon-source: none; // defeats the ugly default handle decoration
     border-style: none; // just to be sure
-    background-color: transparent;
+    background-color: $base;
     // workaround, using background istead of a border since the border will get rendered twice (?)
-    background-image: none;
+    background-image: image($border);
+    background-size: 1px 1px;
     background-clip: content-box; // avoids borders image being rendered twice (?)
 
     &.wide {
       min-width: 6px;
       min-height: 6px;
       background-color: $background;
-      background-image: none;
+      background-image: image($border), image($border);
+      background-size: 1px 1px, 1px 1px;
     }
   }
 
@@ -3901,14 +3913,17 @@ decoration {
   &.minimize, &.maximize, &.close {
     color: $titlebar-text-secondary;
 
-    &:hover {
-      box-shadow: none;
-      background-color: $titlebar-indicator;
+    &:hover, &:active {
       color: on($titlebar-indicator);
     }
 
+    &:hover {
+      box-shadow: none;
+      background-color: $titlebar-indicator;
+    }
+
     &:active {
-      color: on($titlebar-indicator);
+      background-color: $titlebar-indicator;
       box-shadow: inset 0 0 0 9999px on($titlebar-indicator, divider);
       background-image: radial-gradient(circle, on($titlebar-indicator, divider) 10%, transparent 0%);
     }
@@ -3916,7 +3931,7 @@ decoration {
     &:backdrop {
       color: $titlebar-text-secondary-disabled;
 
-      &:hover {
+      &:hover, &:active {
         color: on($titlebar-indicator);
       }
     }
