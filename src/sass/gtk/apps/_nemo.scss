@@ -78,19 +78,26 @@
     color: on($indicator);
     border-radius: $corner-radius;
 
-    > scrolledwindow.frame treeview.view {
-      &:not(:selected) {
-        color: on($indicator);
+    > scrolledwindow.frame {
+      treeview.view {
+        &:not(:selected) {
+          color: on($indicator);
+        }
+  
+        &:selected { @extend %selected_items_primary; }
+  
+        &.expander {
+          color: on($indicator, secondary);
+  
+          &:hover, &:active { color: on($indicator); }
+  
+          &:disabled { color: on($indicator, secondary-disabled); }
+        }
       }
 
-      &:selected { @extend %selected_items_primary; }
-
-      &.expander {
-        color: on($indicator, secondary);
-
-        &:hover, &:active { color: on($indicator); }
-
-        &:disabled { color: on($indicator, secondary-disabled); }
+      scrollbar {
+        @extend %sidebar_scrollbar;
+        @extend %round_scrollbar;
       }
     }
 
@@ -107,6 +114,10 @@
 
     > stack, scrolledwindow.view, scrolledwindow.view > widget.view {
       background-color: transparent;
+    }
+
+    scrolledwindow scrollbar {
+      @extend %round_scrollbar;
     }
   }
 
