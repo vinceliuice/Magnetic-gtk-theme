@@ -2601,8 +2601,13 @@ tabbar {
 
   .box {
     min-height: $medium-size;
-    border-bottom: none;
-    background: none;
+    background-color: $indicator;
+    background-image: none;
+    padding: 0;
+    margin: $space-size / 2;
+    border-radius: $modal-radius + $space-size / 2;
+    border: none;
+    box-shadow: none;
   }
 
   scrolledwindow.pinned {
@@ -2672,11 +2677,10 @@ tabbar {
   }
 
   tabbox {
-    background-color: $indicator;
+    background-color: transparent;
     background-image: none;
-    padding: $space-size / 2 0;
-    margin: $space-size / 2;
-    border-radius: $modal-radius + $space-size / 2;
+    padding: 0;
+    margin: 0;
     border: none;
     box-shadow: none;
 
@@ -2774,11 +2778,6 @@ tabbar {
     .end-action {
       background-color: gtkalpha($titlebar, .6);
       border-color: $border;
-    }
-
-    &:backdrop .box {
-      background-color: $titlebar-backdrop;
-      transition: $transition;
     }
   }
 }

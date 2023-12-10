@@ -648,6 +648,10 @@ overlay-split-view {
 
 // Gnome >= 45.0
 .top-bar {
+  box-shadow: none;
+  background: none;
+  border: none;
+
   headerbar {
     &, &:backdrop {
       background-color: transparent;
