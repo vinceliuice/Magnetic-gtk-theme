@@ -1532,7 +1532,7 @@ button.combo:only-child {
 // searchbar
 searchbar > revealer > box {
   padding: $space-size;
-  border-spacing: $space-size;
+  border-spacing: 0;
   border: none;
   background-color: transparent;
   box-shadow: none;

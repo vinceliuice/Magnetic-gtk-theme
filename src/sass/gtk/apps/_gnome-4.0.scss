@@ -617,6 +617,23 @@ leaflet.unfolded .contacts-contact-list {
   }
 }
 
+.sidebar-pane toolbarview > stack > box > widget > widget {
+  > scrolledwindow {
+    @extend %sidebar_style;
+
+    .dim-label { color: on($indicator, disabled); }
+
+    > scrollbar {
+      @extend %sidebar_scrollbar;
+      @extend %round_scrollbar;
+    }
+
+    > .navigation-sidebar {
+      @extend %sidebar_list;
+    }
+  }
+}
+
 //
 // Gnome Software
 //
