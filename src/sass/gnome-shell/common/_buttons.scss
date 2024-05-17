@@ -1,6 +1,16 @@
 /* Buttons */
 
+// common button styling
+%button_common {
+  border-radius: $base_radius;
+  padding: $base_padding * .5 $base_padding * 4;
+  font-weight: bold;
+  transition: border-width 300ms $ease_out_quad,
+              box-shadow 300ms $ease_out_quad;
+}
+
 %button {
+  @extend %button_common;
   @include button(normal);
   &:focus { @include button(focus); }
   &:hover { @include button(hover); }
@@ -25,11 +35,9 @@
 }
 
 .button {
-  min-height: 20px;
-  padding: $base_padding $base_padding * 2;
-  border-radius: $base_radius;
-  border: none;
   @extend %button;
+  min-height: to_em(22px);
+  border: none;
 
   .popup-menu & {
     @extend %flat_button;
@@ -47,8 +55,9 @@
 }
 
 .icon-button {
+  @extend %button;
   border-radius: $circular_radius;
-  padding: $base_padding;
+  padding: $scaled_padding * 2;
   min-height: $scalable_icon_size;
 
   StIcon {

@@ -45,3 +45,6 @@ $large_icon_size: $base_icon_size * 2; // 32px
 $shorter_duration: 100ms;
 $longer_duration: 150ms;
 $ripple_duration: 250ms;
+
+// animation definition
+$ease_out_quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);

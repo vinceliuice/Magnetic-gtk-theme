@@ -65,14 +65,14 @@
   }
 }
 
-@mixin button($t, $fc: $primary, $tc: $text, $bc: $base) {
+@mixin button($t, $c: $button, $fc: $primary, $tc: $text, $bc: $base) {
 //
 // button
 //
 
   @if $t == normal {
     color: $tc;
-    background-color: $bc;
+    background-color: $c;
     box-shadow: none !important;
   }
 

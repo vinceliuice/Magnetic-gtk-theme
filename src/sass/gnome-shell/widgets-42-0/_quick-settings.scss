@@ -162,10 +162,7 @@
   & > StBoxLayout { spacing: 2 * $base_padding; }
 
   .icon-button {
-    background-color: $button;
-    color: $text;
     border-radius: $base_radius;
-    @extend %button;
 
     > StIcon {
       -st-icon-style: symbolic;

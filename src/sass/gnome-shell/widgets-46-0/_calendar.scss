@@ -26,6 +26,10 @@
   padding: 0;
 }
 
+.datemenu-popover {
+  border-radius: $base_radius + $base_padding * 2 !important;
+}
+
 // Calendar menu side column
 .datemenu-calendar-column {
   spacing: $base_spacing;
@@ -97,7 +101,7 @@
   box-shadow: none;
   background-color: transparent;
   padding: 0 !important;
-  margin: 0 !important;
+  margin: 0 $base_padding !important;
   text-shadow: none;
   border-radius: $menu_radius;
   color: $text-secondary;
@@ -269,7 +273,7 @@
 .events-button {
   @extend %popover_bubble;
   padding: $base_padding * 2 !important;
-  margin: $base_margin 0 0 !important;
+  margin: $base_padding / 2 0 !important;
 }
 
 // Events
