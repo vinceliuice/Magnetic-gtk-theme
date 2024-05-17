@@ -288,7 +288,7 @@ spinner {
  * Text Entries *
  ****************/
 
-%entry-on-indicator {
+%entry_on_indicator {
   background-color: on($indicator, fill);
   color: on($indicator);
 
@@ -3320,11 +3320,6 @@ filechooser {
 
     frame > border { border: none; }
   }
-
-  .csd & placessidebar {
-    background: none;
-    border-bottom-left-radius: $window-radius;
-  }
 }
 
 // filechooserbutton:drop(active) {
@@ -3415,15 +3410,20 @@ stacksidebar.sidebar {
  ****************/
 
 placessidebar.sidebar {
-  margin: $space-size;
+  margin: 0 $space-size $space-size;
   padding: 0;
+  background-color: transparent;
+  border-radius: $corner-radius;
 
-  > viewport.frame { border-style: none; }
-
-  list {
-    padding: $space-size / 2 $space-size;
+  > viewport.frame {
+    border: none;
     background-color: $indicator;
     border-radius: $corner-radius;
+  }
+
+  list {
+    padding: $space-size;
+    background: none;
     color: on($indicator, secondary);
 
     > separator { @extend %hide_separators; }
@@ -3436,6 +3436,8 @@ placessidebar.sidebar {
     padding: 0;
     border-radius: $corner-radius - $space-size;
     color: on($indicator, secondary);
+
+    + row { margin-top: $space-size / 2; }
 
     &:hover, &:active {
       color: on($indicator);
