@@ -398,7 +398,7 @@ overlay-split-view {
   background-color: $indicator;
   color: on($indicator);
   border-radius: $corner-radius;
-  margin: $space-size;
+  margin: 0 $space-size $space-size;
 
   .dim-label {
     color: on($indicator, disabled);
@@ -432,7 +432,7 @@ overlay-split-view {
 %content_style {
   background-color: if($variant == 'light', rgba(white, 0.6), $fill);
   border-radius: $corner-radius;
-  margin: $space-size;
+  margin: 0 $space-size $space-size;
 }
 
 %sidebar_list {

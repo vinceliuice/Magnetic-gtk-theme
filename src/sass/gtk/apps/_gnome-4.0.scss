@@ -599,6 +599,25 @@ menubutton stack > box {
 }
 
 //
+// Gnome Tweaks
+//
+
+leaflet.unfolded {
+  > box > scrolledwindow {
+    @extend %sidebar_style;
+
+    > scrollbar {
+      @extend %sidebar_scrollbar;
+      @extend %round_scrollbar;
+    }
+
+    > viewport > .navigation-sidebar {
+      @extend %sidebar_list;
+    }
+  }
+}
+
+//
 // Contacts
 //
 
