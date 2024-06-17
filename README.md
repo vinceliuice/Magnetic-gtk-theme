@@ -46,10 +46,10 @@ Run the following commands in the terminal:
 -u, --uninstall         Uninstall/Remove installed themes or links
 
 --tweaks                Specify versions for tweaks
-                        1. [nord|dracula|gruvbox]   Nord|Dracula|gruvbox ColorSchemes version
-                        2. black                    Blackness color version
-                        3. float                    Floating gnome-shell panel style
-                        4. outline                  Windows with 2px outline style
+                        1. [nord|dracula|gruvbox|all]   (Nord/Dracula/gruvbox/all) ColorSchemes version
+                        2. black                        Blackness color version
+                        3. float                        Floating gnome-shell panel style
+                        4. outline                      Windows with 2px outline style
 
 -h, --help              Show help
 ```
