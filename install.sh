@@ -10,7 +10,7 @@ source "${REPO_DIR}/gtkrc.sh"
 ROOT_UID=0
 DEST_DIR=
 
-ctype=
+scheme=
 
 # Destination directory
 if [ "$UID" -eq "$ROOT_UID" ]; then
@@ -24,6 +24,7 @@ SASSC_OPT="-M -t expanded"
 THEME_NAME=Magnetic
 THEME_VARIANTS=('' '-Purple' '-Pink' '-Red' '-Orange' '-Yellow' '-Green' '-Teal' '-Grey')
 COLOR_VARIANTS=('' '-Light' '-Dark')
+SCHEME_VARIANTS=('' '-Nord' '-Dracula' '-Gruvbox')
 SIZE_VARIANTS=('' '-Compact')
 
 if [[ "$(command -v gnome-shell)" ]]; then
@@ -66,10 +67,10 @@ OPTIONS:
   -u, --uninstall         Uninstall/Remove installed themes or links
 
   --tweaks                Specify versions for tweaks
-                          1. [nord|dracula|gruvbox]   Nord|Dracula|gruvbox ColorSchemes version
-                          2. black                    Blackness color version
-                          3. float                    Floating gnome-shell panel style
-                          4. outline                  Windows with 2px outline style
+                          1. [nord|dracula|gruvbox|all]   (Nord/Dracula/gruvbox/all) ColorSchemes version
+                          2. black                        Blackness color version
+                          3. float                        Floating gnome-shell panel style
+                          4. outline                      Windows with 2px outline style
 
   -h, --help              Show help
 EOF
@@ -81,7 +82,7 @@ install() {
   local theme="${3}"
   local color="${4}"
   local size="${5}"
-  local ctype="${6}"
+  local scheme="${6}"
 
   [[ "${color}" == '-Light' ]] && local ELSE_LIGHT="${color}"
   [[ "${color}" == '-Dark' ]] && local ELSE_DARK="${color}"
@@ -115,7 +116,7 @@ install() {
 
   cp -r "${SRC_DIR}/assets/gnome-shell/common-assets"                                        "${THEME_DIR}/gnome-shell/assets"
   cp -r "${SRC_DIR}/assets/gnome-shell/assets${ELSE_DARK:-}/"*.svg                           "${THEME_DIR}/gnome-shell/assets"
-  cp -r "${SRC_DIR}/assets/gnome-shell/theme${theme}${ctype}/"*.svg                          "${THEME_DIR}/gnome-shell/assets"
+  cp -r "${SRC_DIR}/assets/gnome-shell/theme${theme}${scheme}/"*.svg                         "${THEME_DIR}/gnome-shell/assets"
 
   cd "${THEME_DIR}/gnome-shell"
   ln -s assets/no-events.svg no-events.svg
@@ -123,29 +124,29 @@ install() {
   ln -s assets/no-notifications.svg no-notifications.svg
 
   mkdir -p                                                                                   "${THEME_DIR}/gtk-2.0"
-  # cp -r "${SRC_DIR}/main/gtk-2.0/gtkrc${theme}${ELSE_DARK:-}${ctype}"                        "${THEME_DIR}/gtk-2.0/gtkrc"
+  # cp -r "${SRC_DIR}/main/gtk-2.0/gtkrc${theme}${ELSE_DARK:-}${scheme}"                        "${THEME_DIR}/gtk-2.0/gtkrc"
   cp -r "${SRC_DIR}/main/gtk-2.0/common/"*'.rc'                                              "${THEME_DIR}/gtk-2.0"
   cp -r "${SRC_DIR}/assets/gtk-2.0/assets-common${ELSE_DARK:-}"                              "${THEME_DIR}/gtk-2.0/assets"
-  cp -r "${SRC_DIR}/assets/gtk-2.0/assets${theme}${ELSE_DARK:-}${ctype}/"*"png"              "${THEME_DIR}/gtk-2.0/assets"
+  cp -r "${SRC_DIR}/assets/gtk-2.0/assets${theme}${ELSE_DARK:-}${scheme}/"*"png"              "${THEME_DIR}/gtk-2.0/assets"
 
   mkdir -p                                                                                   "${THEME_DIR}/gtk-3.0"
   cp -r "${SRC_DIR}/assets/gtk/scalable"                                                     "${THEME_DIR}/gtk-3.0/assets"
-  cp -r "${SRC_DIR}/assets/gtk/thumbnails/thumbnail${theme}${ctype}${ELSE_DARK:-}.png"       "${THEME_DIR}/gtk-3.0/thumbnail.png"
+  cp -r "${SRC_DIR}/assets/gtk/thumbnails/thumbnail${theme}${scheme}${ELSE_DARK:-}.png"      "${THEME_DIR}/gtk-3.0/thumbnail.png"
   sassc $SASSC_OPT "${SRC_DIR}/main/gtk-3.0/gtk${color}.scss"                                "${THEME_DIR}/gtk-3.0/gtk.css"
   sassc $SASSC_OPT "${SRC_DIR}/main/gtk-3.0/gtk-Dark.scss"                                   "${THEME_DIR}/gtk-3.0/gtk-dark.css"
 
   mkdir -p                                                                                   "${THEME_DIR}/gtk-4.0"
   cp -r "${SRC_DIR}/assets/gtk/scalable"                                                     "${THEME_DIR}/gtk-4.0/assets"
-  cp -r "${SRC_DIR}/assets/gtk/thumbnails/thumbnail${theme}${ctype}${ELSE_DARK:-}.png"       "${THEME_DIR}/gtk-4.0/thumbnail.png"
+  cp -r "${SRC_DIR}/assets/gtk/thumbnails/thumbnail${theme}${scheme}${ELSE_DARK:-}.png"      "${THEME_DIR}/gtk-4.0/thumbnail.png"
   sassc $SASSC_OPT "${SRC_DIR}/main/gtk-4.0/gtk${color}.scss"                                "${THEME_DIR}/gtk-4.0/gtk.css"
   sassc $SASSC_OPT "${SRC_DIR}/main/gtk-4.0/gtk-Dark.scss"                                   "${THEME_DIR}/gtk-4.0/gtk-dark.css"
 
   mkdir -p                                                                                   "${THEME_DIR}/cinnamon"
   cp -r "${SRC_DIR}/assets/cinnamon/common-assets"                                           "${THEME_DIR}/cinnamon/assets"
   cp -r "${SRC_DIR}/assets/cinnamon/assets${ELSE_DARK:-}/"*'.svg'                            "${THEME_DIR}/cinnamon/assets"
-  cp -r "${SRC_DIR}/assets/cinnamon/theme${theme}${ctype}/"*'.svg'                           "${THEME_DIR}/cinnamon/assets"
+  cp -r "${SRC_DIR}/assets/cinnamon/theme${theme}${scheme}/"*'.svg'                          "${THEME_DIR}/cinnamon/assets"
   sassc $SASSC_OPT "${SRC_DIR}/main/cinnamon/cinnamon${color}.scss"                          "${THEME_DIR}/cinnamon/cinnamon.css"
-  cp -r "${SRC_DIR}/assets/cinnamon/thumbnails/thumbnail${theme}${ctype}${color}.png"        "${THEME_DIR}/cinnamon/thumbnail.png"
+  cp -r "${SRC_DIR}/assets/cinnamon/thumbnails/thumbnail${theme}${scheme}${color}.png"        "${THEME_DIR}/cinnamon/thumbnail.png"
 
   mkdir -p                                                                                   "${THEME_DIR}/metacity-1"
   cp -r "${SRC_DIR}/main/metacity-1/metacity-theme-3.xml"                                    "${THEME_DIR}/metacity-1/metacity-theme-3.xml"
@@ -170,6 +171,7 @@ themes=()
 colors=()
 sizes=()
 lcolors=()
+schemes=()
 
 while [[ $# -gt 0 ]]; do
   case "${1}" in
@@ -308,36 +310,42 @@ while [[ $# -gt 0 ]]; do
       for variant in $@; do
         case "$variant" in
           nord)
-            nord="true"
-            ctype="-Nord"
-            echo -e "Nord ColorScheme version! ..."
+            colorscheme='true'
+            schemes+=("${SCHEME_VARIANTS[1]}")
+            echo -e "\nNord ColorScheme version! ...\n"
             shift
             ;;
           dracula)
-            dracula="true"
-            ctype="-Dracula"
-            echo -e "Dracula ColorScheme version! ..."
+            colorscheme='true'
+            schemes+=("${SCHEME_VARIANTS[2]}")
+            echo -e "\nDracula ColorScheme version! ...\n"
             shift
             ;;
           gruvbox)
-            gruvbox="true"
-            ctype="-Gruvbox"
-            echo -e "Gruvbox ColorScheme version! ..."
+            colorscheme='true'
+            schemes+=("${SCHEME_VARIANTS[3]}")
+            echo -e "\nGruvbox ColorScheme version! ...\n"
+            shift
+            ;;
+          all)
+            colorscheme='true'
+            schemes+=("${SCHEME_VARIANTS[@]}")
+            echo -e "\nInstall all ColorSchemes version! ...\n"
             shift
             ;;
           black)
             blackness="true"
-            echo -e "Blackness version! ..."
+            echo -e "\nBlackness version! ..."
             shift
             ;;
           float)
             float="true"
-            echo -e "Install Floating Gnome-Shell Panel version! ..."
+            echo -e "\nInstall Floating Gnome-Shell Panel version! ..."
             shift
             ;;
           outline)
             outline="true"
-            echo -e "Install 2px windows outline version! ..."
+            echo -e "\nInstall 2px windows outline version! ..."
             shift
             ;;
           -*)
@@ -379,6 +387,10 @@ if [[ "${#sizes[@]}" -eq 0 ]] ; then
   sizes=("${SIZE_VARIANTS[0]}")
 fi
 
+if [[ "${#schemes[@]}" -eq 0 ]] ; then
+  schemes=("${SCHEME_VARIANTS[0]}")
+fi
+
 #  Check command avalibility
 function has_command() {
   command -v $1 > /dev/null
@@ -410,21 +422,6 @@ compact_size() {
   sed -i "/\$compact:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
 }
 
-nord_color() {
-  sed -i "/\@import/s/color-palette-default/color-palette-nord/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-  sed -i "/\$colorscheme:/s/default/nord/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-dracula_color() {
-  sed -i "/\@import/s/color-palette-default/color-palette-dracula/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-  sed -i "/\$colorscheme:/s/default/dracula/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
-gruvbox_color() {
-  sed -i "/\@import/s/color-palette-default/color-palette-gruvbox/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-  sed -i "/\$colorscheme:/s/default/gruvbox/" "${SRC_DIR}/sass/_tweaks-temp.scss"
-}
-
 blackness_color() {
   sed -i "/\$blackness:/s/false/true/" "${SRC_DIR}/sass/_tweaks-temp.scss"
 }
@@ -444,6 +441,24 @@ gnome_shell_version() {
 
   if [[ "${GS_VERSION}" != '40-0' && "${GS_VERSION}" != '42-0' && "${GS_VERSION}" != '44-0' ]]; then
     sed -i "/\extensions/s/40-0/${GS_VERSION}/" "${SRC_DIR}/sass/gnome-shell/_common-temp.scss"
+  fi
+}
+
+color_schemes() {
+  if [[ "$scheme" != '' ]]; then
+    case "$scheme" in
+      -Nord)
+        scheme_color='nord'
+        ;;
+      -Dracula)
+        scheme_color='dracula'
+        ;;
+      -Gruvbox)
+        scheme_color='gruvbox'
+        ;;
+    esac
+    sed -i "/\@import/s/color-palette-default/color-palette-${scheme_color}/" "${SRC_DIR}/sass/_tweaks-temp.scss"
+    sed -i "/\$colorscheme:/s/default/${scheme_color}/" "${SRC_DIR}/sass/_tweaks-temp.scss"
   fi
 }
 
@@ -489,16 +504,8 @@ theme_tweaks() {
     compact_size
   fi
 
-  if [[ "$nord" = "true" ]] ; then
-    nord_color
-  fi
-
-  if [[ "$dracula" = "true" ]] ; then
-    dracula_color
-  fi
-
-  if [[ "$gruvbox" = "true" ]] ; then
-    gruvbox_color
+  if [[ "$colorscheme" = "true" ]] ; then
+    color_schemes
   fi
 
   if [[ "$blackness" = "true" ]] ; then
@@ -524,7 +531,7 @@ link_libadwaita() {
   local theme="${3}"
   local color="${4}"
   local size="${5}"
-  local ctype="${6}"
+  local scheme="${6}"
 
   local THEME_DIR="${1}/${2}${3}${4}${5}${6}"
 
@@ -542,7 +549,9 @@ link_theme() {
   for theme in "${themes[@]}"; do
     for color in "${lcolors[@]}"; do
       for size in "${sizes[@]}"; do
-        link_libadwaita "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
+        for scheme in "${schemes[@]}"; do
+          link_libadwaita "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$scheme"
+        done
       done
     done
   done
@@ -552,8 +561,10 @@ install_theme() {
   for theme in "${themes[@]}"; do
     for color in "${colors[@]}"; do
       for size in "${sizes[@]}"; do
-        install "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
-        make_gtkrc "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
+        for scheme in "${schemes[@]}"; do
+          install "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$scheme"
+          make_gtkrc "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$scheme"
+        done
       done
     done
   done
@@ -573,7 +584,7 @@ uninstall() {
   local theme="${3}"
   local color="${4}"
   local size="${5}"
-  local ctype="${6}"
+  local scheme="${6}"
 
   local THEME_DIR="${1}/${2}${3}${4}${5}${6}"
 
@@ -587,7 +598,9 @@ uninstall_theme() {
   for theme in "${themes[@]}"; do
     for color in "${colors[@]}"; do
       for size in "${sizes[@]}"; do
-        uninstall "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$ctype"
+        for scheme in "${schemes[@]}"; do
+          uninstall "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$scheme"
+        done
       done
     done
   done
