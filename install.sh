@@ -13,8 +13,12 @@ DEST_DIR=
 scheme=
 
 # Destination directory
-if [ "$UID" -eq "$ROOT_UID" ]; then
+if [[ "$UID" -eq "$ROOT_UID" ]]; then
   DEST_DIR="/usr/share/themes"
+elif [[ -n "$XDG_DATA_HOME" ]]; then
+  DEST_DIR="$XDG_DATA_HOME/themes"
+elif [[ -d "$HOME/.local/share/themes" ]]; then
+  DEST_DIR="$HOME/.local/share/themes"
 else
   DEST_DIR="$HOME/.themes"
 fi
@@ -71,6 +75,7 @@ OPTIONS:
                           2. black                        Blackness color version
                           3. float                        Floating gnome-shell panel style
                           4. outline                      Windows with 2px outline style
+                          5. normal                       Normal sidebar style
 
   -h, --help              Show help
 EOF
@@ -590,7 +595,7 @@ uninstall() {
 
   if [[ -d "${THEME_DIR}" ]]; then
     echo -e "Uninstall ${THEME_DIR}... "
-    rm -rf "${THEME_DIR}"
+    rm -rf "${THEME_DIR}"{'','-hdpi','-xhdpi'}
   fi
 }
 
@@ -606,6 +611,23 @@ uninstall_theme() {
   done
 }
 
+clean_theme() {
+  local dest="$HOME/.themes"
+  local themes=("${THEME_VARIANTS[@]}")
+  local sizes=("${SIZE_VARIANTS[@]}")
+  local schemes=("${SCHEME_VARIANTS[@]}")
+
+  for theme in "${themes[@]}"; do
+    for color in "${colors[@]}"; do
+      for size in "${sizes[@]}"; do
+        for scheme in "${schemes[@]}"; do
+          uninstall "${dest}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$scheme"
+        done
+      done
+    done
+  done
+}
+
 if [[ "$uninstall" == 'true' ]]; then
   if [[ "$libadwaita" == 'true' ]]; then
     echo -e "\nUninstall ${HOME}/.config/gtk-4.0 links ..."
@@ -614,7 +636,7 @@ if [[ "$uninstall" == 'true' ]]; then
     echo && uninstall_theme && uninstall_link
   fi
 else
-  install_package && tweaks_temp && gnome_shell_version && install_theme
+  install_package && tweaks_temp && gnome_shell_version && clean_theme && install_theme
   if [[ "$libadwaita" == 'true' ]]; then
     uninstall_link && link_theme
   fi

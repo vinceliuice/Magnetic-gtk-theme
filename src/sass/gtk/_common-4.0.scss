@@ -447,6 +447,11 @@ editablelabel > stack > text {
   background-color: $base;
   color: $text;
 
+  &:hover {
+    background-color: mix($text, $base, 10%);
+    color: $text;
+  }
+
   &:checked, &:checked:hover {
     background-color: on($indicator);
     color: $indicator;
@@ -3138,6 +3143,26 @@ popover.menu radio {
   &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/small-radio-mixed-symbolic.svg")), -gtk-recolor(url("assets/small-radio-mixed-symbolic@2.svg"))); }
 }
 
+%check-and-radio-on-indicator {
+  &:not(:checked):not(:indeterminate) {
+    background-color: on($indicator, divider);
+
+    &:hover {
+      box-shadow: 0 0 0 6px on($indicator, fill);
+      background-color: rgba(on($indicator), 0.15);
+    }
+  
+    &:active {
+      box-shadow: 0 0 0 6px on($indicator, divider);
+      background-color: rgba(on($indicator), 0.20);
+    }
+  
+    &:disabled {
+      background-color: on($indicator, fill);
+    }
+  }
+}
+
 // ANIMATION:
 // this is made with those pretty convoluted transitions, since checks and radios have to animate only on state changes,
 // the transformation is set on the active state and it get reset on the checked state.
@@ -3495,24 +3520,69 @@ frame {
   statusbar & > border { border: none; } // for backward compatibility
 }
 
-actionbar {
-  box-shadow: none;
+actionbar { box-shadow: none; }
 
-  > revealer > box {
-    padding: $space-size;
-    border-spacing: $space-size;
-    box-shadow: none;
-    background-color: $base;
-    background-clip: border-box;
-    border: none;
-    color: $text;
-  
-    button, entry,
-    menubutton, menubutton > button,
-    splitbutton, splitbutton > button,
-    spinbutton {
-      margin: 0;
+actionbar > revealer > box {
+  margin: $space-size;
+  padding: $space-size;
+  border-spacing: $space-size;
+  border: none;
+  color: on($indicator);
+  background-color: $indicator;
+  border-radius: $corner-radius;
+
+  button, entry,
+  menubutton, menubutton > button,
+  splitbutton, splitbutton > button,
+  spinbutton {
+    margin: 0;
+  }
+
+  button {
+    border-radius: $corner-radius - $space-size;
+
+    &:not(.suggested-action):not(.destructive-action):not(.combo) {
+      @extend %button-on-indicator;
     }
+
+    &.combo:only-child {
+      border-radius: $corner-radius - $space-size;
+      color: on($indicator, secondary);
+      background-color: on($indicator, fill);
+
+      &:hover, &:active {
+        color: on($indicator);
+      }
+
+      &:disabled {
+        color: on($indicator, secondary-disabled);
+      }
+    }
+  }
+
+  stackswitcher {
+    background-color: on($indicator, fill);
+  
+    &.linked:not(.vertical) > button:not(.suggested-action):not(.destructive-action) {
+      color: on($indicator, secondary);
+
+      &:hover, &:active {
+        color: on($indicator);
+      }
+
+      &:checked {
+        background-color: $base;
+        color: $text;
+
+        &:hover {
+          background-color: $base-alt;
+        }
+      }
+    }
+  }
+
+  check, radio {
+    @extend %check-and-radio-on-indicator;
   }
 }
 
