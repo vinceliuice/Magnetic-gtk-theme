@@ -1,4 +1,5 @@
 *-temp.scss
+release/*.tar.xz
 src/main/gtk-3.0/gtk.css
 src/main/gtk-3.0/gtk-Light.css
 src/main/gtk-3.0/gtk-Dark.css
