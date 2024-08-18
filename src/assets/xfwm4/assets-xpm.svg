@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="200"
+   height="200"
+   version="1.1"
+   viewBox="0 0 200 200"
+   id="svg1"
+   sodipodi:docname="assets-xpm.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#26282b"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="3.337544"
+     inkscape:cx="56.179035"
+     inkscape:cy="95.878886"
+     inkscape:window-width="1920"
+     inkscape:window-height="1002"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <rect
+     id="title-active"
+     x="25"
+     y="60"
+     width="6"
+     height="34"
+     fill="#3a3d41" />
+  <rect
+     id="title-inactive"
+     x="75"
+     y="60"
+     width="6"
+     height="34"
+     fill="#44474b" />
+  <rect
+     id="left-active"
+     transform="scale(-1,1)"
+     x="-87"
+     y="122"
+     width="2"
+     height="16"
+     fill="#3a3d41" />
+  <rect
+     id="left-inactive"
+     transform="scale(-1,1)"
+     x="-92"
+     y="122"
+     width="2"
+     height="16"
+     fill="#44474b" />
+  <rect
+     id="right-inactive"
+     x="100"
+     y="122"
+     width="2"
+     height="16"
+     fill="#44474b" />
+  <rect
+     id="right-active"
+     x="95"
+     y="122"
+     width="2"
+     height="16"
+     fill="#3a3d41" />
+  <path
+     id="bottom-left-active"
+     d="m114 116h-2v9h1v1l9-1.2e-4v-2l-8 1.2e-4z"
+     fill="#3a3d41" />
+  <path
+     id="bottom-left-inactive"
+     d="m114 128h-2v9h1v1l9-1.2e-4v-2l-8 1.2e-4z"
+     fill="#44474b" />
+  <path
+     id="bottom-right-inactive"
+     d="m150 128h2v9h-1v1h-9v-2l8 1.2e-4z"
+     fill="#44474b" />
+  <path
+     id="bottom-right-active"
+     d="m150 116h2v9h-1v1l-9-1.2e-4v-2l8 1.2e-4z"
+     fill="#3a3d41" />
+  <rect
+     id="bottom-active"
+     transform="rotate(90)"
+     x="124"
+     y="-140"
+     width="2"
+     height="16"
+     fill="#3a3d41" />
+  <rect
+     id="bottom-inactive"
+     transform="rotate(90)"
+     x="136"
+     y="-140"
+     width="2"
+     height="16"
+     fill="#44474b" />
+  <rect
+     id="button-active"
+     x="25"
+     y="21"
+     width="36"
+     height="34"
+     fill="#3a3d41" />
+  <rect
+     id="button-inactive"
+     x="75"
+     y="21"
+     width="36"
+     height="34"
+     fill="#44474b" />
+  <path
+     id="top-left-active"
+     d="m35 110v1h-3v1h-2v1h-1v1h-1v1h-1v1h-1v2h-1v26h12v-34z"
+     fill="#3a3d41" />
+  <path
+     id="top-left-inactive"
+     d="m49 110v1h-3v1h-2v1h-1v1h-1v1h-1v1h-1v2h-1v26h12v-34z"
+     fill="#44474b" />
+  <path
+     id="top-right-active"
+     d="m56 110v1h3v1h2v1h1v1h1v1h1v1h1v2h1v26h-12v-34z"
+     fill="#3a3d41" />
+  <path
+     id="top-right-inactive"
+     d="m70 110v1h3v1h2v1h1v1h1v1h1v1h1v2h1v26h-12v-34z"
+     fill="#44474b" />
+</svg>

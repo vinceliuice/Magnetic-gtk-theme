@@ -17,6 +17,8 @@ if [[ "$UID" -eq "$ROOT_UID" ]]; then
   DEST_DIR="/usr/share/themes"
 elif [[ -n "$XDG_DATA_HOME" ]]; then
   DEST_DIR="$XDG_DATA_HOME/themes"
+elif [[ -d "$HOME/.themes" ]]; then
+  DEST_DIR="$HOME/.themes"
 elif [[ -d "$HOME/.local/share/themes" ]]; then
   DEST_DIR="$HOME/.local/share/themes"
 else
@@ -160,16 +162,19 @@ install() {
   cd "${THEME_DIR}/metacity-1" && ln -s metacity-theme-3.xml metacity-theme-1.xml && ln -s metacity-theme-3.xml metacity-theme-2.xml
 
   mkdir -p                                                                                   "${THEME_DIR}/xfwm4"
-  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}/"*.png                                "${THEME_DIR}/xfwm4"
-  cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                       "${THEME_DIR}/xfwm4/themerc"
+  cp -r "${SRC_DIR}/assets/xfwm4/png/assets${ELSE_DARK:-}/"*.png                             "${THEME_DIR}/xfwm4"
+  cp -r "${SRC_DIR}/assets/xfwm4/xpm/assets/"*.xpm                                           "${THEME_DIR}/xfwm4"
+  cp -r "${SRC_DIR}/main/xfwm4/themerc"                                                      "${THEME_DIR}/xfwm4/themerc"
   mkdir -p                                                                                   "${THEME_DIR}-hdpi/xfwm4"
-  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}-hdpi/"*.png                           "${THEME_DIR}-hdpi/xfwm4"
-  cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                       "${THEME_DIR}-hdpi/xfwm4/themerc"
-  sed -i "s/button_offset=6/button_offset=9/"                                                "${THEME_DIR}-hdpi/xfwm4/themerc"
+  cp -r "${SRC_DIR}/assets/xfwm4/png/assets${ELSE_DARK:-}-hdpi/"*.png                        "${THEME_DIR}-hdpi/xfwm4"
+  cp -r "${SRC_DIR}/assets/xfwm4/xpm/assets-hdpi/"*.xpm                                      "${THEME_DIR}-hdpi/xfwm4"
+  cp -r "${SRC_DIR}/main/xfwm4/themerc"                                                      "${THEME_DIR}-hdpi/xfwm4/themerc"
+  sed -i "s/button_offset=10/button_offset=15/"                                              "${THEME_DIR}-hdpi/xfwm4/themerc"
   mkdir -p                                                                                   "${THEME_DIR}-xhdpi/xfwm4"
-  cp -r "${SRC_DIR}/assets/xfwm4/assets${ELSE_LIGHT:-}-xhdpi/"*.png                          "${THEME_DIR}-xhdpi/xfwm4"
-  cp -r "${SRC_DIR}/main/xfwm4/themerc${ELSE_LIGHT:-}"                                       "${THEME_DIR}-xhdpi/xfwm4/themerc"
-  sed -i "s/button_offset=6/button_offset=12/"                                               "${THEME_DIR}-xhdpi/xfwm4/themerc"
+  cp -r "${SRC_DIR}/assets/xfwm4/png/assets${ELSE_DARK:-}-xhdpi/"*.png                       "${THEME_DIR}-xhdpi/xfwm4"
+  cp -r "${SRC_DIR}/assets/xfwm4/xpm/assets-xhdpi/"*.xpm                                     "${THEME_DIR}-xhdpi/xfwm4"
+  cp -r "${SRC_DIR}/main/xfwm4/themerc"                                                      "${THEME_DIR}-xhdpi/xfwm4/themerc"
+  sed -i "s/button_offset=10/button_offset=20/"                                              "${THEME_DIR}-xhdpi/xfwm4/themerc"
 }
 
 themes=()
@@ -600,10 +605,10 @@ uninstall() {
 }
 
 uninstall_theme() {
-  for theme in "${themes[@]}"; do
-    for color in "${colors[@]}"; do
-      for size in "${sizes[@]}"; do
-        for scheme in "${schemes[@]}"; do
+  for theme in "${THEME_VARIANTS[@]}"; do
+    for color in "${COLOR_VARIANTS[@]}"; do
+      for size in "${SIZE_VARIANTS[@]}"; do
+        for scheme in "${SCHEME_VARIANTS[@]}"; do
           uninstall "${dest:-$DEST_DIR}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$scheme"
         done
       done
@@ -612,21 +617,16 @@ uninstall_theme() {
 }
 
 clean_theme() {
-  local dest="$HOME/.themes"
-  local themes=("${THEME_VARIANTS[@]}")
-  local sizes=("${SIZE_VARIANTS[@]}")
-  local schemes=("${SCHEME_VARIANTS[@]}")
-
-  for theme in "${themes[@]}"; do
-    for color in "${colors[@]}"; do
-      for size in "${sizes[@]}"; do
-        for scheme in "${schemes[@]}"; do
-          uninstall "${dest}" "${name:-$THEME_NAME}" "$theme" "$color" "$size" "$scheme"
-        done
-      done
-    done
-  done
+  if [[ "$UID" -eq "$ROOT_UID" ]]; then
+    uninstall_theme
+  else
+    local DEST_DIR="$HOME/.themes"
+    uninstall_theme
+    local DEST_DIR="$HOME/.local/share/themes"
+    uninstall_theme
+  fi
 }
+
 
 if [[ "$uninstall" == 'true' ]]; then
   if [[ "$libadwaita" == 'true' ]]; then
