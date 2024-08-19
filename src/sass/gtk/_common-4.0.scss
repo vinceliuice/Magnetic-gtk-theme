@@ -2391,7 +2391,7 @@ notebook {
   > header {
     border: none;
     background-color: $indicator;
-    // padding: $space-size / 2;
+    padding: 0;
     margin: $space-size / 2;
     border-radius: $modal-radius + $space-size / 2;
     // background-clip: border-box;
@@ -2453,6 +2453,8 @@ notebook {
     }
 
     > tabs {
+      margin: 0;
+
       > arrow {
         @extend %button-flat-simple;
 
