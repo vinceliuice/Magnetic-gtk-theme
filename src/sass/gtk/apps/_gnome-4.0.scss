@@ -217,7 +217,7 @@ toastoverlay {
 
 calendar-view {
   font-size: 10pt;
-  @extend %content_style;
+  border-radius: $corner-radius;
 
   &:selected {
     color: $primary;

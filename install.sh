@@ -620,13 +620,12 @@ clean_theme() {
   if [[ "$UID" -eq "$ROOT_UID" ]]; then
     uninstall_theme
   else
-    local DEST_DIR="$HOME/.themes"
-    uninstall_theme
-    local DEST_DIR="$HOME/.local/share/themes"
-    uninstall_theme
+    if [[ "$DEST_DIR" == "$HOME/.themes" ]]; then
+      local DEST_DIR="$HOME/.local/share/themes"
+      uninstall_theme
+    fi
   fi
 }
-
 
 if [[ "$uninstall" == 'true' ]]; then
   if [[ "$libadwaita" == 'true' ]]; then
