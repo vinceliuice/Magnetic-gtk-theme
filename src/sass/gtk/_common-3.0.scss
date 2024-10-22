@@ -3320,6 +3320,8 @@ filechooser {
 
     frame > border { border: none; }
   }
+
+  paned > separator { background: none; }
 }
 
 // filechooserbutton:drop(active) {

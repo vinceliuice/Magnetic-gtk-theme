@@ -768,23 +768,11 @@ button {
       color: on($b_color);
       box-shadow: none;
 
+      &:hover { background-color: mix(on($b_color), $b_color, 10%); }
+
       &:disabled { @include button(disabled); }
 
-      &:hover {
-        box-shadow: inset 0 0 0 9999px transparent,
-                    0 2px (4px * .6) -1px rgba($b_color, 0.2),
-                    0 4px (5px * .6) 0 rgba($b_color, 0.14),
-                    0 1px (10px * .6) 0 rgba($b_color, 0.12);
-      }
-
-      &:checked { background-color: mix(on($b_color), $b_color, percentage(0.3)); }
-
-      &:checked:hover {
-        box-shadow: inset 0 0 0 9999px transparent,
-                    0 3px 3px -3px rgba($b_color, 0.3),
-                    0 2px 3px -1px rgba($b_color, 0.24),
-                    0 2px 5px 0 rgba($b_color, 0.12);
-      }
+      &:checked { background-color: mix(on($b_color), $b_color, 30%); }
 
       &:focus { box-shadow: 0 0 0 2px rgba($b_color, 0.35); }
 
@@ -4275,17 +4263,11 @@ calendar {
  ***********/
 
 %dialog_action_button {
-  border-radius: 0;
+  border-radius: $corner-radius;
   min-height: $menuitem-size;
   padding: $space-size $space-size * 2;
   margin: 0;
   border: none;
-
-  &:first-child { border-radius: 0 0 0 $window-radius; }
-
-  &:last-child { border-radius: 0 0 $window-radius 0; }
-
-  &:only-child { border-radius: 0 0 $window-radius $window-radius; }
 }
 
 window.dialog.message { // Message Dialog styling
@@ -4320,16 +4302,15 @@ window.dialog.message { // Message Dialog styling
 
   .dialog-action-area {
     // margin-top: $space-size;
-    border-top: 1px solid $border;
+    border: none;
     margin: 0;
-    border-spacing: 0;
+    padding: $space-size;
+    border-spacing: $space-size;
 
     > button {
       border: none;
       @extend %button-flat;
       @extend %dialog_action_button;
-
-      &:not(:last-child) { border-right: 1px solid $border; }
 
       &.suggested-action:not(:disabled) {
         color: $suggested;
@@ -4361,51 +4342,32 @@ window.aboutdialog {
 window.messagedialog {
   background-color: $surface;
   color: $text;
+  padding: $space-size;
 
   .message-area {
     padding: 24px 30px;
     border-spacing: 10px;
   }
 
-  .response-area > box > button {
-    @extend %button-flat;
-    @extend %dialog_action_button;
+  .response-area {
+    border-spacing: $space-size;
 
-    &.suggested {
-      color: $primary;
-    }
-
-    &.destructive {
-      color: $destructive;
-    }
-  }
-
-  &.csd:not(.solid-csd) {
-    border-radius: $window-radius;
-
-    .response-area {
-      > box.horizontal > button {
-        margin: 0;
-
-        &:first-child {
-          margin-left: 0;
-        }
-
-        &:last-child {
-          margin-right: 0;
-        }
+    button {
+      @extend %button-flat;
+      @extend %dialog_action_button;
+  
+      &.suggested {
+        color: $primary;
       }
-
-      > box.vertical > button {
-        margin-top: 0;
-        margin-bottom: 0;
-
-      &:last-child {
-        border-bottom-left-radius: $window-radius;
-        border-bottom-right-radius: $window-radius;
-        margin-bottom: 0;
+  
+      &.destructive {
+        color: $destructive;
       }
     }
+
+    separator {
+      background: none;
+      margin: $space-size / 2;
     }
   }
 }
@@ -5205,7 +5167,7 @@ popover.emoji-picker {
 .emoji-searchbar {
   padding: $space-size;
   border-spacing: $space-size;
-  border-bottom: 1px solid $divider;
+  // border-bottom: 1px solid $divider;
   background: none;
 
   entry {
@@ -5217,16 +5179,24 @@ popover.emoji-picker {
 }
 
 .emoji-toolbar {
-  padding: 0;
-  border-spacing: $space-size / 2;
-  border-top: 1px solid $divider;
+  padding: $space-size / 2;
+  border-spacing: 0;
+  // border-top: 1px solid $divider;
   background: none;
+
+  > flowboxchild {
+    padding: $space-size / 2;
+
+    > button {
+      padding: $space-size;
+    }
+  }
 }
 
 button.emoji-section {
   margin: 0;
   padding: $space-size;
-  border-radius: $corner-radius;
+  border-radius: $menuitem-radius;
 
   &:checked {
     color: $primary;
