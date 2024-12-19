@@ -9,10 +9,6 @@
 
   flap > separator { background-color: transparent; }
 
-  placesview {
-    label { color: $text-secondary; }
-  }
-
   .nautilus-grid-view {
     child.activatable {
       @extend %row_activatable;
@@ -111,6 +107,7 @@
 // Gnome Control Center
 //
 
+window.background > contents > leaflet.unfolded,
 window.background > widget > leaflet.unfolded {
   > box > scrolledwindow {
     @extend %sidebar_style;

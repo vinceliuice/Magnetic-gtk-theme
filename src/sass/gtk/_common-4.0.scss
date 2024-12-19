@@ -3550,6 +3550,16 @@ actionbar > revealer > box {
     }
   }
 
+  entry {
+    color: on($indicator, secondary);
+
+    &:focus-within { color: on($indicator); }
+
+    &:drop(active), &:hover:not(:focus-within) { color: on($indicator); }
+
+    &:disabled { color: on($indicator, secondary-disabled); }
+  }
+
   stackswitcher {
     background-color: on($indicator, fill);
   
