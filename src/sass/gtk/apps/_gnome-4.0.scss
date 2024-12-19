@@ -602,8 +602,8 @@ menubutton stack > box {
 // Gnome Tweaks
 //
 
-leaflet.unfolded {
-  > box > scrolledwindow {
+dialog-host > widget > widget > box > leaflet.unfolded {
+  > box > searchbar + scrolledwindow {
     @extend %sidebar_style;
 
     > scrollbar {
