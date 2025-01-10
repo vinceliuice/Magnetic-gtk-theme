@@ -20,12 +20,12 @@ $root-font-size: if($compact == 'false', 14px, 13px);
 // Radiuses
 //
 
-$window-radius: 20px;
-$modal-radius: 6px;
+$window-radius: 2px;
+$modal-radius: 2px;
 $corner-radius: $window-radius - $space-size;
 $menu-radius: $corner-radius;
 $menuitem-radius: $menu-radius - $space-size;
-$circular-radius: 9999px;
+$circular-radius: 2px;
 
 //
 // Durations
