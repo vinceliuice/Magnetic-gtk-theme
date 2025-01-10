@@ -1,6 +1,5 @@
 ## Magnetic gtk theme
 
-![Magnetic](screenshot.jpg?raw=true)
 
 ## Requirements
 
