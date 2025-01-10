@@ -1,5 +1,6 @@
 ## Magnetic gtk theme
 
+![2pxrounded](https://github.com/user-attachments/assets/858bde3b-bb98-42b3-bca0-a47a5ae32d60)
 
 ## Requirements
 
