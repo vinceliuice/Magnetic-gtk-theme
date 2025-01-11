@@ -448,15 +448,43 @@ overlay-split-view {
       color: on($indicator);
     }
 
+    &:disabled, label:disabled {
+      color: on($indicator, secondary-disabled);
+    }
+
     &:selected {
       font-weight: 500;
       background-color: $base;
       color: $text;
 
+      .subtitle { color: $text-secondary; }
+
       &:hover, &:focus {
         background-color: rgba($base, 0.9);
         color: $text;
       }
+    }
+  }
+
+  .dim-label { color: on($indicator, disabled); }
+
+  check, radio {
+    &:not(:checked):not(:indeterminate) {
+      background-color: on($indicator, divider);
+    }
+
+    &:hover:not(:checked):not(:indeterminate) {
+      box-shadow: 0 0 0 6px on($indicator, fill);
+      background-color: rgba(on($indicator), 0.15);
+    }
+
+    &:active:not(:checked):not(:indeterminate) {
+      box-shadow: 0 0 0 6px on($indicator, divider);
+      background-color: rgba(on($indicator), 0.20);
+    }
+
+    &:disabled:not(:checked):not(:indeterminate) {
+      background-color: on($indicator, fill);
     }
   }
 }
@@ -555,32 +583,10 @@ overlay-split-view {
     border: none;
   }
 
-  .navigation-sidebar {
-    @extend %sidebar_list;
-
-    check, radio {
-      &:not(:checked):not(:indeterminate) {
-        background-color: on($indicator, divider);
-      }
-
-      &:hover:not(:checked):not(:indeterminate) {
-        box-shadow: 0 0 0 6px on($indicator, fill);
-        background-color: rgba(on($indicator), 0.15);
-      }
-
-      &:active:not(:checked):not(:indeterminate) {
-        box-shadow: 0 0 0 6px on($indicator, divider);
-        background-color: rgba(on($indicator), 0.20);
-      }
-
-      &:disabled:not(:checked):not(:indeterminate) {
-        background-color: on($indicator, fill);
-      }
-    }
-  }
-
   .sidebar,
   toolbarview,
+  toolbarview > box,
+  navigation-view-page toastoverlay,
   navigation-view-page stack { // Pamac manager
     > scrolledwindow {
       @extend %sidebar_style;
@@ -588,6 +594,10 @@ overlay-split-view {
       > scrollbar {
         @extend %sidebar_scrollbar;
         @extend %round_scrollbar;
+      }
+
+      .navigation-sidebar {
+        @extend %sidebar_list;
       }
     }
   }
