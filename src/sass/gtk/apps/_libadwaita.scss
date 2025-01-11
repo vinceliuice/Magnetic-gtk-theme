@@ -695,6 +695,12 @@ overlay-split-view {
   }
 }
 
+.bottom-bar {
+  actionbar > revealer > box {
+    margin: 0;
+  }
+}
+
 // ThemeSelector
 themeselector, // Gnome text editor
 panelthemeselector { // Gnome builder
