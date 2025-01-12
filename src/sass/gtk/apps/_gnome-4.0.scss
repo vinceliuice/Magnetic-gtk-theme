@@ -618,7 +618,8 @@ dialog-host > widget > widget > box > leaflet.unfolded {
 // Contacts
 //
 
-leaflet.unfolded .contacts-contact-list {
+leaflet.unfolded .contacts-contact-list,
+.sidebar-pane toolbarview > stack > box > widget > widget {
   > scrolledwindow {
     @extend %sidebar_style;
 
@@ -627,27 +628,14 @@ leaflet.unfolded .contacts-contact-list {
       @extend %round_scrollbar;
     }
 
-    > viewport > .navigation-sidebar {
+    .navigation-sidebar.contact-list.view {
       @extend %sidebar_list;
     }
   }
 }
 
-.sidebar-pane toolbarview > stack > box > widget > widget {
-  > scrolledwindow {
-    @extend %sidebar_style;
-
-    .dim-label { color: on($indicator, disabled); }
-
-    > scrollbar {
-      @extend %sidebar_scrollbar;
-      @extend %round_scrollbar;
-    }
-
-    > .navigation-sidebar {
-      @extend %sidebar_list;
-    }
-  }
+#list-pane > toolbarview > revealer .toolbar {
+  entry { border-radius: $corner-radius; }
 }
 
 //
