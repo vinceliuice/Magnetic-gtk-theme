@@ -4,6 +4,7 @@ set -Eeo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 SRC_DIR="${REPO_DIR}/src"
+UNITY_DIR="$SRC_DIR/assets/unity"
 
 source "${REPO_DIR}/gtkrc.sh"
 
@@ -147,6 +148,9 @@ install() {
   cp -r "${SRC_DIR}/assets/gtk/thumbnails/thumbnail${theme}${scheme}${ELSE_DARK:-}.png"      "${THEME_DIR}/gtk-4.0/thumbnail.png"
   sassc $SASSC_OPT "${SRC_DIR}/main/gtk-4.0/gtk${color}.scss"                                "${THEME_DIR}/gtk-4.0/gtk.css"
   sassc $SASSC_OPT "${SRC_DIR}/main/gtk-4.0/gtk-Dark.scss"                                   "${THEME_DIR}/gtk-4.0/gtk-dark.css"
+
+# copy unity folder under assets to theme dir
+  cp -r "${UNITY_DIR}"                                                                       "${THEME_DIR}"
 
   mkdir -p                                                                                   "${THEME_DIR}/cinnamon"
   cp -r "${SRC_DIR}/assets/cinnamon/common-assets"                                           "${THEME_DIR}/cinnamon/assets"
