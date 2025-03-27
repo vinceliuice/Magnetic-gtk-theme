@@ -393,6 +393,14 @@ overlay-split-view {
   @include transition-shadows($frame);
 }
 
+toolbarview.undershoot-top scrolledwindow {
+  @include undershoot(top);
+}
+
+toolbarview.undershoot-bottom scrolledwindow {
+  @include undershoot(bottom);
+}
+
 // Sidebar
 %sidebar_style {
   background-color: $indicator;
@@ -698,6 +706,11 @@ overlay-split-view {
 .bottom-bar {
   actionbar > revealer > box {
     margin: 0;
+  }
+
+  .toolbar {
+    background-color: transparent;
+    border-spacing: 0;
   }
 }
 
