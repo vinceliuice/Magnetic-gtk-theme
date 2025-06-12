@@ -2691,6 +2691,7 @@ tabbar {
 
     > tabboxchild {
       padding: 0;
+      border-radius: 0;
 
       > tab {
         @extend %tabs_tab;
@@ -5018,7 +5019,7 @@ window {
   min-height: 22px;
   min-width: 22px;
   padding: 0;
-  margin: 0 $space-size / 2;
+  margin: ($large-size - 22px) / 2  $space-size / 2;
 
   &.minimize, &.maximize, &.close {
     color: $titlebar-text-secondary;
@@ -5055,6 +5056,7 @@ $window-space: if($window_button == 'mac', $space-size * 1.5, $space-size);
 
 headerbar windowcontrols {
   border-spacing: $space-size;
+  padding: 0;
 
   &:not(.empty) {
     &.start:dir(ltr),
