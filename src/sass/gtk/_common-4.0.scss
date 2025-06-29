@@ -922,12 +922,9 @@ splitbutton {
     background: none;
   }
 
-  > menubutton > button {
-    padding: ($medium-size - 24px) / 2 ($medium-size - 16px) / 2;
-  }
-
   // Since the inner button doesn't have any style classes on it,
   // we have to add them manually
+  > menubutton > button,
   &.image-button > button {
     min-width: 24px;
     padding-left: $space-size;
