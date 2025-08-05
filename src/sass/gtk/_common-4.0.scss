@@ -4942,7 +4942,6 @@ window {
   min-height: 22px;
   min-width: 22px;
   padding: 0;
-  margin: ($large-size - 22px) / 2  $space-size / 2;
 
   &.minimize, &.maximize, &.close {
     color: $titlebar-text-secondary;
@@ -4998,6 +4997,13 @@ headerbar windowcontrols {
   button:not(.suggested-action):not(.destructive-action) {
     @extend %circular-button;
     @extend %windows-button;
+    margin: ($large-size - 22px) / 2 $space-size / 2;
+  }
+}
+
+headerbar.default-decoration windowcontrols {
+  button:not(.suggested-action):not(.destructive-action) {
+    margin: ($medium-size - 22px) / 2 $space-size / 2;
   }
 }
 
