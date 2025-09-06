@@ -1791,3 +1791,28 @@ window.dialog {
     }
   }
 }
+
+//
+// Chrome
+//
+
+window.background.chromium {
+  background-color: $list-row;
+
+  headerbar.header-bar.titlebar {
+    padding: 0 $space-size * 2;
+    background-color: $titlebar;
+    color: $titlebar-text;
+    border-radius: $window-radius $window-radius 0 0;
+    box-shadow: inset 0 1px 0 rgba(white, 0.1);
+
+    &:backdrop {
+      background-color: $titlebar-backdrop;
+      color: $titlebar-text-disabled;
+    }
+
+    button.titlebutton {
+      margin: 0 $space-size / 2;
+    }
+  }
+}

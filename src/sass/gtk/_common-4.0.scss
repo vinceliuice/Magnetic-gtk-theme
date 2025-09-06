@@ -1591,12 +1591,6 @@ headerbar {
     &:backdrop { color: $titlebar-text-disabled; }
   }
 
-  // Don't draw titlebar above titlebar
-  .titlebar {
-    background-color: transparent;
-    box-shadow: none;
-  }
-
   // The separator for split headerbars
   headerbar + separator {
     background-color: $titlebar-divider;
@@ -1762,16 +1756,6 @@ headerbar {
   .maximized &.default-decoration {
     border-radius: 0;
     box-shadow: none; // just remove the highlight
-  }
-}
-
-window > {
-  .titlebar:not(.flat) {
-    box-shadow: none;
-  }
-
-  .titlebar headerbar:not(.flat) {
-    box-shadow: none;
   }
 }
 
