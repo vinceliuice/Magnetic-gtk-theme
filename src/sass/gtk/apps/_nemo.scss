@@ -36,11 +36,17 @@
       padding-right: 8px;
       color: $titlebar-text-secondary;
 
-      &:hover, &:active { color: $titlebar-text; }
+      &:hover, &:active {
+        color: $titlebar-text;
+      }
 
-      &:disabled { color: $titlebar-text-secondary-disabled; }
+      &:disabled {
+        color: $titlebar-text-secondary-disabled;
+      }
 
-      &:backdrop { color: $titlebar-text-disabled; }
+      &:backdrop {
+        color: $titlebar-text-disabled;
+      }
     }
 
     .path-bar.linked:not(.vertical) > button {
@@ -88,15 +94,21 @@
         &:not(:selected) {
           color: on($indicator);
         }
-  
-        &:selected { @extend %selected_items_primary; }
-  
+
+        &:selected {
+          @extend %selected_items_primary;
+        }
+
         &.expander {
           color: on($indicator, secondary);
-  
-          &:hover, &:active { color: on($indicator); }
-  
-          &:disabled { color: on($indicator, secondary-disabled); }
+
+          &:hover, &:active {
+            color: on($indicator);
+          }
+
+          &:disabled {
+            color: on($indicator, secondary-disabled);
+          }
         }
       }
 
@@ -115,7 +127,7 @@
   .nemo-window-pane notebook {
     margin: $space-size;
     border-radius: $corner-radius;
-    background-color: if($variant == 'light', rgba(white, 0.6), $fill);
+    background-color: if($variant =='light', rgba(white, 0.6), $fill);
 
     > stack, scrolledwindow.view, scrolledwindow.view > widget.view {
       background-color: transparent;
@@ -135,7 +147,9 @@
   scrolledwindow.frame {
     border-style: none;
 
-    .view:not(:selected) { background-color: transparent; }
+    .view:not(:selected) {
+      background-color: transparent;
+    }
   }
 
   // Rename box styling in the icon view.
@@ -143,7 +157,9 @@
     border-radius: $corner-radius;
     background-color: $fill;
 
-    &:selected { @extend %selected_items_primary; }
+    &:selected {
+      @extend %selected_items_primary;
+    }
   }
 
   .toolbar {
@@ -167,6 +183,23 @@
 
   &.background.csd.maximized .toolbar {
     border-radius: 0;
+  }
+
+  .floating-bar {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background-color: $primary;
+    color: on($primary);
+
+    &.bottom.right {
+      border-top-left-radius: $corner-radius;
+    }
+
+    &.bottom.left {
+      border-top-right-radius: $corner-radius;
+    }
   }
 }
 

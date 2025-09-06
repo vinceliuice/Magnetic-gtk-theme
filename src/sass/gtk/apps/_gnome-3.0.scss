@@ -13,15 +13,21 @@ $nautilus: $base-alt;
     border-radius: 0 0 $window-radius $window-radius;
     background-color: $nautilus;
 
-    &:backdrop { background-color: $base; }
+    &:backdrop {
+      background-color: $base;
+    }
 
     > grid.horizontal > paned.horizontal > separator,
-    > deck > box.vertical > paned.horizontal > separator { margin-left: if($variant == 'light', -1px, 0); }
+    > deck > box.vertical > paned.horizontal > separator {
+      margin-left: if($variant =='light', -1px, 0);
+    }
 
     placessidebar {
       > viewport.frame {
         > list {
-          > separator { background: none; }
+          > separator {
+            background: none;
+          }
         }
       }
     }
@@ -59,46 +65,56 @@ $nautilus: $base-alt;
         }
 
         placesview {
-          > stack > frame > scrolledwindow > viewport > list { background-color: transparent; }
+          > stack > frame > scrolledwindow > viewport > list {
+            background-color: transparent;
+          }
+
           > actionbar {
             background-color: transparent;
             border-radius: 0 0 $window-radius $window-radius;
 
-            > revealer > box { background-color: transparent; }
+            > revealer > box {
+              background-color: transparent;
+            }
           }
         }
       }
 
-      paned > separator.wide { // Use paned separator to hide stack border-bottom-left-radius
+      paned > separator.wide {
+        // Use paned separator to hide stack border-bottom-left-radius
         min-width: $window-radius;
         box-shadow: $window-radius 0 $base;
         background-color: $base;
-        background-image: image(if($variant == 'light', mix(black, $nautilus, 12%), mix(white, $nautilus, 12%)));
+        background-image: image(if($variant =='light', mix(black, $nautilus, 12%), mix(white, $nautilus, 12%)));
       }
     }
   }
 
-  &.maximized { // No border radius when window maximized
-    &, placessidebar { border-radius: 0; }
-  }
+  &.maximized {
 
-  // Floating status bar
-  .floating-bar {
-    min-height: 32px;
-    padding: 0;
-    margin: $space-size;
-    border: none;
-    border-radius: $corner-radius;
-    background-color: $primary;
-    color: on($primary);
-    box-shadow: $shadow-z3;
-
-    button {
-      margin: (32px - $small-size) / 2;
-      color: on($primary);
-
-      @extend %small-button;
+    // No border radius when window maximized
+    &, placessidebar {
+      border-radius: 0;
     }
+  }
+}
+
+// Floating status bar
+.floating-bar {
+  min-height: 32px;
+  padding: 0;
+  margin: $space-size;
+  border: none;
+  border-radius: $corner-radius;
+  background-color: $primary;
+  color: on($primary);
+  box-shadow: $shadow-z3;
+
+  button {
+    margin: (32px - $small-size) / 2;
+    color: on($primary);
+
+    @extend %small-button;
   }
 }
 
@@ -120,7 +136,9 @@ $nautilus: $base-alt;
 // Toolbar
 
 @keyframes nautilus-operations-button-needs-attention {
-  to { background-color: $overlay-focus; }
+  to {
+    background-color: $overlay-focus;
+  }
 }
 
 .nautilus-operations-button-needs-attention {
@@ -137,9 +155,15 @@ $nautilus: $base-alt;
   margin: $space-size 0;
   border-radius: $corner-radius;
 
-  button { margin: 0; } // reset the margin
+  button {
+    margin: 0;
+  }
 
-  &.width-maximized { background-color: $titlebar-fill; }
+  // reset the margin
+
+  &.width-maximized {
+    background-color: $titlebar-fill;
+  }
 
   // workaround for 3.30.1
   &.background.frame {
@@ -150,9 +174,13 @@ $nautilus: $base-alt;
   // for 3.30
   .path-bar button {
     label:not(:only-child) {
-      &:first-child { margin-left: 0; }
+      &:first-child {
+        margin-left: 0;
+      }
 
-      &:last-child { margin-right: 0; }
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
@@ -164,9 +192,13 @@ $nautilus: $base-alt;
     margin-right: 1px;
 
     label:not(:only-child) {
-      &:first-child { margin-left: 0; }
+      &:first-child {
+        margin-left: 0;
+      }
 
-      &:last-child { margin-right: 0; }
+      &:last-child {
+        margin-right: 0;
+      }
     }
 
     &.text-button {
@@ -175,8 +207,11 @@ $nautilus: $base-alt;
     }
 
     &.text-button.image-button {
+
       // border-radius: $circular_radius;
-      image:not(:only-child) { margin: 0; }
+      image:not(:only-child) {
+        margin: 0;
+      }
     }
 
     &:last-child:dir(ltr),
@@ -249,7 +284,9 @@ $nautilus: $base-alt;
   @extend .entry-tag;
 }
 
-.conflict-row:not(:selected) { background-color: mix($warning, $base, percentage(0.3)); }
+.conflict-row:not(:selected) {
+  background-color: mix($warning, $base, percentage(0.3));
+}
 
 // Icon view
 .nautilus-window flowboxchild {
@@ -263,7 +300,9 @@ $nautilus: $base-alt;
   &:selected {
     background-color: transparent;
 
-    .icon-item-background { @extend %selected_items_color; }
+    .icon-item-background {
+      @extend %selected_items_color;
+    }
   }
 }
 
@@ -278,15 +317,21 @@ $nautilus: $base-alt;
 
 // Batch rename dialog
 dialog.background > box.dialog-vbox.vertical > grid.horizontal {
-  > scrolledwindow.frame { border-style: none; }
+  > scrolledwindow.frame {
+    border-style: none;
+  }
 
   > box.horizontal:last-child {
     margin: -6px 0 0 -6px;
     border-top: 1px solid $divider;
 
-    > label { margin: 0 8px; }
+    > label {
+      margin: 0 8px;
+    }
 
-    > box > button { border-radius: 0; }
+    > box > button {
+      border-radius: 0;
+    }
   }
 }
 
@@ -300,11 +345,15 @@ dialog.background > box.dialog-vbox.vertical > grid.horizontal {
     > box {
       margin-bottom: -6px;
 
-      &.linked { margin-top: 1px; }
+      &.linked {
+        margin-top: 1px;
+      }
     }
   }
 
-  separator { margin-bottom: -2px; }
+  separator {
+    margin-bottom: -2px;
+  }
 }
 
 .nautilus-menu-sort-heading {
@@ -314,14 +363,20 @@ dialog.background > box.dialog-vbox.vertical > grid.horizontal {
   margin: 1px 3px;
   font-weight: 500;
 
-  &:disabled { color: $text-secondary; }
+  &:disabled {
+    color: $text-secondary;
+  }
 }
 
 // Make operations button circular
-.nautilus-window headerbar revealer > button { @extend %circular-button; }
+.nautilus-window headerbar revealer > button {
+  @extend %circular-button;
+}
 
 // Ensure paned separator rendering. See issue #84 for details.
-.nautilus-window paned > separator { background-color: $base-alt; }
+.nautilus-window paned > separator {
+  background-color: $base-alt;
+}
 
 
 /*********
@@ -334,7 +389,9 @@ dialog.background > box.dialog-vbox.vertical > grid.horizontal {
 
 window.org-gnome-gedit {
   > paned.titlebar {
-    > separator { background-color: transparent; }
+    > separator {
+      background-color: transparent;
+    }
   }
 
   > overlay > box.vertical {
@@ -342,11 +399,13 @@ window.org-gnome-gedit {
 
       // 'file-browser' pane
       > box.vertical > stack > grid.horizontal {
-        > box.horizontal {  // header-part
+        > box.horizontal {
+          // header-part
           margin: 4px 0;
         }
 
-        > scrolledwindow { // raised widget
+        > scrolledwindow {
+          // raised widget
           border-bottom-left-radius: $window-radius;
 
           // treeview.view:not(:hover):not(:selected) {
@@ -408,9 +467,11 @@ window.org-gnome-gedit {
   background-color: $surface;
   border-radius: 0 0 $menu-radius $menu-radius;
 
-  @if $outline == 'false' {
+  @if $outline =='false' {
     box-shadow: $shadow-z5;
-  } @else {
+  }
+
+  @else {
     box-shadow: $shadow-z5, 0 0 0 2px $indicator;
   }
 
@@ -421,32 +482,51 @@ window.org-gnome-gedit {
     }
 
     &:dir(ltr) {
-      .gedit-search-entry-occurrences-tag { margin-left: $space-size; }
+      .gedit-search-entry-occurrences-tag {
+        margin-left: $space-size;
+      }
 
-      image.right { margin-right: 0; }
+      image.right {
+        margin-right: 0;
+      }
     }
 
     &:dir(rtl) {
-      .gedit-search-entry-occurrences-tag { margin-right: $space-size; }
+      .gedit-search-entry-occurrences-tag {
+        margin-right: $space-size;
+      }
 
-      image.left { margin-left: 0; }
+      image.left {
+        margin-left: 0;
+      }
     }
 
-    &:not(.error) { background-color: $surface; }
+    &:not(.error) {
+      background-color: $surface;
+    }
 
     &.error ~ button {
       color: on($error, secondary);
 
-      &:hover, &:active { color: on($error); }
+      &:hover, &:active {
+        color: on($error);
+      }
 
-      &:disabled { color: on($error, secondary-disabled); }
+      &:disabled {
+        color: on($error, secondary-disabled);
+      }
     }
   }
 }
 
 frame.gedit-map-frame > border {
-  &:dir(ltr) { border-style: none none none solid; }
-  &:dir(rtl) { border-style: none solid none none; }
+  &:dir(ltr) {
+    border-style: none none none solid;
+  }
+
+  &:dir(rtl) {
+    border-style: none solid none none;
+  }
 }
 
 
@@ -467,11 +547,17 @@ frame.gedit-map-frame > border {
   slider {
     background-color: on($indicator, disabled);
 
-    &:hover { background-color: on($indicator, secondary); }
+    &:hover {
+      background-color: on($indicator, secondary);
+    }
 
-    &:active { background-color: on($indicator); }
+    &:active {
+      background-color: on($indicator);
+    }
 
-    &:disabled { background-color: on($indicator, secondary-disabled); }
+    &:disabled {
+      background-color: on($indicator, secondary-disabled);
+    }
   }
 
   &.overlay-indicator {
@@ -479,14 +565,16 @@ frame.gedit-map-frame > border {
       button {
         background-color: on($indicator, disabled);
 
-        &:disabled { background-color: on($indicator, secondary-disabled); }
+        &:disabled {
+          background-color: on($indicator, secondary-disabled);
+        }
       }
     }
   }
 }
 
 %content_style {
-  background-color: if($variant == 'light', rgba(white, 0.6), $fill);
+  background-color: if($variant =='light', rgba(white, 0.6), $fill);
   border-radius: $corner-radius;
   margin: $space-size;
 }
@@ -554,20 +642,26 @@ frame.gedit-map-frame > border {
     }
 
     &.dragging,
-    &.hovering { background-color: transparent; }
+    &.hovering {
+      background-color: transparent;
+    }
   }
 }
 
 .tweak {
   padding: 3px;
 
-  &.title:hover { box-shadow: none; }
+  &.title:hover {
+    box-shadow: none;
+  }
 }
 
 .tweak-group-startup {
   border: 1px solid $border;
 
-  > row:not(:first-child) { border-top: 1px solid $border; }
+  > row:not(:first-child) {
+    border-top: 1px solid $border;
+  }
 }
 
 // Workaround for 3.26
@@ -576,7 +670,9 @@ list {
     list {
       @extend %circular_list;
 
-      > row { @extend %circular_row; }
+      > row {
+        @extend %circular_row;
+      }
     }
   }
 }
@@ -585,6 +681,7 @@ list {
 row#Focus,
 row#ClickMethod,
 row#PrimaryWorkspaceTweak, // for 3.26.0
+
 row#workspaces-only-on-primary {
   margin-top: 4px;
 }
@@ -592,8 +689,10 @@ row#workspaces-only-on-primary {
 // See https://github.com/nana-4/materia-theme/issues/432
 leaflet.titlebar > .titlebar.tweak-titlebar-left,
 leaflet.titlebar > .titlebar.tweak-titlebar-right, // Workaround for gnome-tweaks 40.0
+
 hdyleaflet.titlebar > .titlebar.tweak-titlebar-left,
-hdyleaflet.titlebar > .titlebar.tweak-titlebar-right { // Workaround for gnome-tweaks 3.34
+hdyleaflet.titlebar > .titlebar.tweak-titlebar-right {
+  // Workaround for gnome-tweaks 3.34
   background-color: inherit;
   box-shadow: inherit;
   // Remove only background-color transition.
@@ -624,6 +723,7 @@ leaflet.unfolded {
  ************************/
 window.background.csd {
   > headerbar.titlebar {
+
     > leaflet,
     > hdyleaflet {
       > headerbar {
@@ -643,7 +743,9 @@ window.background.csd {
     }
   }
 
-  > stack:not(.titlebar) > stack.background { border-radius: 0 0 $window-radius $window-radius; }
+  > stack:not(.titlebar) > stack.background {
+    border-radius: 0 0 $window-radius $window-radius;
+  }
 
   > leaflet,
   > hdyleaflet,
@@ -651,10 +753,14 @@ window.background.csd {
     > stack.background {
       background: none;
 
-      frame > border { border: none; }
+      frame > border {
+        border: none;
+      }
 
       > widget {
-        > box.vertical > box.vertical { // Gnome 3.34 Wallpaper setting
+        > box.vertical > box.vertical {
+
+          // Gnome 3.34 Wallpaper setting
           > scrolledwindow > viewport.frame {
             background-color: $base;
             border-bottom-right-radius: $window-radius;
@@ -667,12 +773,14 @@ window.background.csd {
       }
     }
 
-    frame.view { // Wifi setting
+    frame.view {
+      // Wifi setting
       border-radius: $corner-radius;
       background: none;
     }
 
-    > box.vertical > scrolledwindow.view { // > 3.25.90
+    > box.vertical > scrolledwindow.view {
+      // > 3.25.90
       background-color: transparent;
 
       > viewport.frame > stack {
@@ -680,11 +788,14 @@ window.background.csd {
           background-color: transparent;
         }
 
-        list { // left-pane
+        list {
+          // left-pane
           @extend %sidebar_list;
         }
 
-        entry { @extend %entry_on_indicator; }
+        entry {
+          @extend %entry_on_indicator;
+        }
       }
 
       scrollbar {
@@ -696,19 +807,25 @@ window.background.csd {
   }
 
   stack.background clamp.medium {
-    frame > box.vertical > box.vertical { // VPN setting
+    frame > box.vertical > box.vertical {
+
+      // VPN setting
       > list {
         border-top-width: 0;
         border-bottom-width: 0;
 
-        &, > row { border-radius: 0; }
+        &, > row {
+          border-radius: 0;
+        }
       }
 
       &:first-child {
         > list {
           border-top-width: 1px;
 
-          &, > row { border-radius: $corner-radius $corner-radius 0 0; }
+          &, > row {
+            border-radius: $corner-radius $corner-radius 0 0;
+          }
         }
       }
 
@@ -716,7 +833,9 @@ window.background.csd {
         > list {
           border-bottom-width: 1px;
 
-          &, > row { border-radius:  0 0 $corner-radius $corner-radius; }
+          &, > row {
+            border-radius: 0 0 $corner-radius $corner-radius;
+          }
         }
       }
     }
@@ -728,7 +847,9 @@ window.background.csd {
 }
 
 dialog.background.csd {
-  > box.vertical.dialog-vbox { // wifi setting
+  > box.vertical.dialog-vbox {
+
+    // wifi setting
     > notebook > stack > box.horizontal > notebook > stack {
       border-radius: 0 0 $window-radius $window-radius;
     }
@@ -736,7 +857,9 @@ dialog.background.csd {
     > scrolledwindow > viewport.frame > list {
       background: none;
 
-      > row:not(:hover):not(:active):not(:selected) { background-color: transparent; }
+      > row:not(:hover):not(:active):not(:selected) {
+        background-color: transparent;
+      }
     }
   }
 }
@@ -745,7 +868,9 @@ hdyleaflet, leaflet, box.horizontal > stack.background {
   frame:not(.view) list:not(.contacts-contact-list) {
     @extend %circular_list;
 
-    row { @extend %circular_row; }
+    row {
+      @extend %circular_row;
+    }
   }
 
   stack.background, overlay {
@@ -753,7 +878,9 @@ hdyleaflet, leaflet, box.horizontal > stack.background {
       list {
         @extend %circular_list;
 
-        row { @extend %circular_row; }
+        row {
+          @extend %circular_row;
+        }
       }
     }
   }
@@ -761,7 +888,9 @@ hdyleaflet, leaflet, box.horizontal > stack.background {
   list.view, list.frame {
     @extend %circular_list;
 
-    row { @extend %circular_row; }
+    row {
+      @extend %circular_row;
+    }
   }
 }
 
@@ -782,7 +911,9 @@ window#gnome-system-monitor.background.csd {
 }
 
 window#gnome-system-monitor.background:not(.csd) {
-  > box.vertical > headerbar { box-shadow: none; }
+  > box.vertical > headerbar {
+    box-shadow: none;
+  }
 }
 
 
@@ -802,7 +933,11 @@ stack {
       }
     }
 
-    scrolledwindow.frame.emptyGrid { border: none; } // Removed ugly borders
+    scrolledwindow.frame.emptyGrid {
+      border: none;
+    }
+
+    // Removed ugly borders
   }
 }
 
@@ -821,7 +956,8 @@ window.background.csd {
  * Epiphany (Gnome Web) *
  ************************/
 
-tabbox { // Gnome 40.0
+tabbox {
+  // Gnome 40.0
   border: none;
   background-color: $fill;
   padding: $space-size / 2;
@@ -863,7 +999,9 @@ tabbox { // Gnome 40.0
  * Gnome Music *
  ***************/
 window.background.csd {
-  box.vertical > overlay > stack.background { border-radius: 0 0 $window-radius $window-radius; }
+  box.vertical > overlay > stack.background {
+    border-radius: 0 0 $window-radius $window-radius;
+  }
 }
 
 
@@ -875,7 +1013,9 @@ window.background.csd.unified {
     list {
       @extend %circular_list;
 
-      row { @extend %circular_row; }
+      row {
+        @extend %circular_row;
+      }
     }
   }
 }
@@ -916,7 +1056,9 @@ window.background.csd.unified {
       }
     }
 
-    > widget > box > image { padding: 0; }
+    > widget > box > image {
+      padding: 0;
+    }
   }
 }
 
@@ -943,7 +1085,9 @@ window.solid-csd > box.vertical > box.vertical {
     margin: -1px 0;
     padding: 0;
 
-    > border { border: none; }
+    > border {
+      border: none;
+    }
   }
 }
 
@@ -953,23 +1097,35 @@ window.background > box.vertical > toolbar.primary-toolbar {
   padding: 0 $space-size * 2 0 $space-size;
 
   > toolitem {
-    > .linked > button.image-button.raised { // 'shuffle/repeat'
+    > .linked > button.image-button.raised {
+      // 'shuffle/repeat'
       // @extend %circular-button;
       // @extend %rhythmbox-image-button;
       @include button(normal);
 
-      &:hover { @include button(hover); }
+      &:hover {
+        @include button(hover);
+      }
 
-      &:active { @include button(active); }
+      &:active {
+        @include button(active);
+      }
 
-      &:disabled { @include button(disabled); }
+      &:disabled {
+        @include button(disabled);
+      }
 
-      &:checked { @include button(checked); }
+      &:checked {
+        @include button(checked);
+      }
 
-      > widget > box > image { padding: 0 3px; }
+      > widget > box > image {
+        padding: 0 3px;
+      }
     }
 
-    button.flat.scale { // 'volume'
+    button.flat.scale {
+      // 'volume'
       // @extend %circular-button;
       @extend %rhythmbox-image-button;
     }
@@ -984,9 +1140,11 @@ window.background > box.vertical > toolbar.primary-toolbar {
 
 window.background > box > .sidebar-paned {
   > paned > box > notebook > stack > box {
+
     > grid > grid > grid,
     > box > grid > grid > grid,
-    > notebook > stack > grid > grid > grid { // Button box part
+    > notebook > stack > grid > grid > grid {
+      // Button box part
       border-bottom: 1px solid $border;
       padding: $space-size;
       margin: -6px;
@@ -994,7 +1152,8 @@ window.background > box > .sidebar-paned {
 
     > grid > grid > box,
     > box > grid > grid > box,
-    > notebook > stack > grid > grid > box { // Search box part
+    > notebook > stack > grid > grid > box {
+      // Search box part
       border-bottom: 1px solid $border;
       padding: 0 $space-size $space-size;
       margin: 0 -6px -6px 0;
@@ -1012,6 +1171,7 @@ window.background > box > .sidebar-paned {
   }
 
   > paned > box > notebook > stack > box > box {
+
     > grid > grid > grid,
     > box > grid > grid > grid,
     > notebook > stack > grid > grid > grid {
@@ -1063,7 +1223,9 @@ stack.view.polari-entry-area {
   border-bottom-right-radius: $window-radius;
 }
 
-stack:disabled.view.polari-entry-area { background-image: image($background); }
+stack:disabled.view.polari-entry-area {
+  background-image: image($background);
+}
 
 /***********
  * Builder *
@@ -1081,7 +1243,9 @@ layouttabbar {
   border-bottom: 1px solid $divider;
   background-color: $background;
 
-  button { @extend %button-flat; }
+  button {
+    @extend %button-flat;
+  }
 
   > box > button {
     margin: (40px - $medium-size) / 2 0;
@@ -1097,7 +1261,9 @@ layouttab {
   box-shadow: inset 0 -2px $primary;
   background-color: $base;
 
-  separator.vertical { margin: 8px 4px; }
+  separator.vertical {
+    margin: 8px 4px;
+  }
 
   button {
     &.text-button, &.image-button, & {
@@ -1133,21 +1299,35 @@ popover.popover-selector list {
     border-radius: $corner-radius;
 
     image {
-      &:dir(ltr) { margin-right: 6px; }
-      &:dir(rtl) { margin-left: 6px; }
+      &:dir(ltr) {
+        margin-right: 6px;
+      }
+
+      &:dir(rtl) {
+        margin-left: 6px;
+      }
     }
 
     .accel {
-      &:dir(ltr) { margin-left: 6px; }
-      &:dir(rtl) { margin-right: 6px; }
+      &:dir(ltr) {
+        margin-left: 6px;
+      }
+
+      &:dir(rtl) {
+        margin-right: 6px;
+      }
     }
   }
 }
 
 omnibar {
-  &.linked:not(.vertical) entry { border-radius: $corner-radius; }
+  &.linked:not(.vertical) entry {
+    border-radius: $corner-radius;
+  }
 
-  &:not(:hover):not(:active) entry { color: $text-secondary; }
+  &:not(:hover):not(:active) entry {
+    color: $text-secondary;
+  }
 }
 
 popover.omnibar list row:not(:last-child) {
@@ -1165,21 +1345,36 @@ entry.preferences-search {
 }
 
 preferences stacksidebar.sidebar {
-  list { background-color: $base-alt; }
+  list {
+    background-color: $base-alt;
+  }
 
   &:dir(ltr),
-  &:dir(rtl) { list { border-style: none; }}
+  &:dir(rtl) {
+    list {
+      border-style: none;
+    }
+  }
 
-  list separator { @extend %hide_separators; }
+  list separator {
+    @extend %hide_separators;
+  }
 }
 
 preferences > box > box {
-  &:dir(ltr) { border-right: 1px solid $divider; }
-  &:dir(rtl) { border-left: 1px solid $divider; }
+  &:dir(ltr) {
+    border-right: 1px solid $divider;
+  }
+
+  &:dir(rtl) {
+    border-left: 1px solid $divider;
+  }
 }
 
 popover.messagepopover {
-  &.background { padding: 0; }
+  &.background {
+    padding: 0;
+  }
 
   .popover-action-area button {
     @extend %button-flat-simple;
@@ -1188,20 +1383,30 @@ popover.messagepopover {
     border-top: 1px solid $divider;
     border-radius: 0;
 
-    &:first-child { border-bottom-left-radius: $corner-radius; }
+    &:first-child {
+      border-bottom-left-radius: $corner-radius;
+    }
 
-    &:last-child { border-bottom-right-radius: $corner-radius; }
+    &:last-child {
+      border-bottom-right-radius: $corner-radius;
+    }
   }
 
-  .popover-content-area { margin: 16px; }
+  .popover-content-area {
+    margin: 16px;
+  }
 }
 
 popover.transfers list {
   background-color: transparent;
 
-  row:not(:first-child) { border-top: 1px solid $divider; }
+  row:not(:first-child) {
+    border-top: 1px solid $divider;
+  }
 
-  row > box { padding: 10px; }
+  row > box {
+    padding: 10px;
+  }
 }
 
 dockbin {
@@ -1227,14 +1432,14 @@ docktabstrip {
 
 docktab {
   transition: $transition,
-              background-size 0ms,
-              background-image 0ms;
+    background-size 0ms,
+    background-image 0ms;
   min-height: $small-size;
   min-width: $small-size;
   margin-bottom: -1px;
   padding: $space-size 6px;
 
-  border-width: 1px;         // for reorderable tabs
+  border-width: 1px; // for reorderable tabs
   border-color: transparent; //
 
   box-shadow: inset 0 -2px transparent;
@@ -1253,8 +1458,8 @@ docktab {
 
   &:checked {
     transition: $transition,
-                background-size $ripple-fade-in-duration $ease-out,
-                background-image $ripple-fade-in-duration + $ripple-fade-out-duration $ease-out;
+      background-size $ripple-fade-in-duration $ease-out,
+      background-image $ripple-fade-in-duration + $ripple-fade-out-duration $ease-out;
     box-shadow: inset 0 -2px $primary;
     background-color: transparent;
     background-image: radial-gradient(circle, transparent 10%, transparent 0%);
@@ -1271,9 +1476,13 @@ dockoverlayedge {
     border: none;
   }
 
-  &.left-edge docktab:checked { box-shadow: inset -2px 0 $primary; }
+  &.left-edge docktab:checked {
+    box-shadow: inset -2px 0 $primary;
+  }
 
-  &.right-edge docktab:checked { box-shadow: inset 2px 0 $primary; }
+  &.right-edge docktab:checked {
+    box-shadow: inset 2px 0 $primary;
+  }
 }
 
 pillbox {
@@ -1337,20 +1546,26 @@ button.run-arrow-button {
 button.dzlmenubutton image {
   min-width: $medium-size - 6px;
 
-  &.arrow { min-width: $medium-size - 9px; }
+  &.arrow {
+    min-width: $medium-size - 9px;
+  }
 }
 
 button.dzlmenubuttonitem {
   color: $text;
   font-weight: normal;
 
-  &:disabled { color: $text-disabled; }
+  &:disabled {
+    color: $text-disabled;
+  }
 }
 
 idelayoutstackheader {
   border-bottom: 1px solid $divider;
 
-  button:checked { color: $text; }
+  button:checked {
+    color: $text;
+  }
 }
 
 // utilities stack switcher
@@ -1358,9 +1573,13 @@ ideeditorutilities > dzldockpaned > box > stackswitcher {
   padding: 8px 0;
   background-color: $background;
 
-  &:dir(ltr) { border-right: 1px solid $divider; }
+  &:dir(ltr) {
+    border-right: 1px solid $divider;
+  }
 
-  &:dir(rtl) { border-left: 1px solid $divider; }
+  &:dir(rtl) {
+    border-left: 1px solid $divider;
+  }
 
   button {
     border-radius: 0;
@@ -1379,13 +1598,17 @@ ideeditorutilities > dzldockpaned > box > stackswitcher {
     &:dir(ltr) {
       margin-right: -1px;
 
-      &:checked { box-shadow: inset -2px 0 $primary; }
+      &:checked {
+        box-shadow: inset -2px 0 $primary;
+      }
     }
 
     &:dir(rtl) {
       margin-left: -1px;
 
-      &:checked { box-shadow: inset 2px 0 $primary; }
+      &:checked {
+        box-shadow: inset 2px 0 $primary;
+      }
     }
   }
 }
@@ -1401,7 +1624,9 @@ popover.messagepopover {
   list {
     border: 1px solid $divider;
 
-    row:not(:last-child) { border-bottom: 1px solid $divider; }
+    row:not(:last-child) {
+      border-bottom: 1px solid $divider;
+    }
   }
 }
 
@@ -1436,11 +1661,12 @@ GdMainIconView.content-view {
 .documents-scrolledwin.frame {
   border-style: none;
 
-  frame.content-view > border { border-style: none; }
+  frame.content-view > border {
+    border-style: none;
+  }
 }
 
-.photos-icon-bg {
-}
+.photos-icon-bg {}
 
 .photos-fade-in {
   opacity: 1;
@@ -1452,8 +1678,7 @@ GdMainIconView.content-view {
   transition: opacity $duration $ease-out;
 }
 
-.photos-collection-icon {
-}
+.photos-collection-icon {}
 
 button.photos-filter-preview {
   color: $text;
@@ -1470,8 +1695,13 @@ button.photos-filter-preview {
 }
 
 overlay grid.horizontal > revealer > scrolledwindow.frame {
-  &:dir(ltr) { border-style: none none none solid; }
-  &:dir(rtl) { border-style: none solid none none; }
+  &:dir(ltr) {
+    border-style: none none none solid;
+  }
+
+  &:dir(rtl) {
+    border-style: none solid none none;
+  }
 }
 
 
@@ -1497,21 +1727,27 @@ overlay grid.horizontal > revealer > scrolledwindow.frame {
   // background-color: mix(@theme_fg_color, @theme_bg_color, 0.9);
   background-image: image($base-alt);
 
-  &:hover { background-image: image(mix($text, $base-alt, percentage(0.08))); }
+  &:hover {
+    background-image: image(mix($text, $base-alt, percentage(0.08)));
+  }
 }
 
 .side-panel .view:selected {
   // background-color: mix(@theme_fg_color, @theme_bg_color, 0.5);
   background-image: image($primary);
 
-  &:hover { background-image: image(mix(on($primary), $primary, percentage(0.08))); }
+  &:hover {
+    background-image: image(mix(on($primary), $primary, percentage(0.08)));
+  }
 }
 
 .songs-list {
   // box-shadow: inset 0 -1px shade(@borders, 1.30);
   // background-color: @theme_bg_color;
 
-  &:hover { background-image: image($overlay-hover); }
+  &:hover {
+    background-image: image($overlay-hover);
+  }
 }
 
 frame.documents-dropdown {
@@ -1519,7 +1755,9 @@ frame.documents-dropdown {
 
   margin: 8px;
 
-  > border { border: none; }
+  > border {
+    border: none;
+  }
 }
 
 box.vertical > revealer > toolbar.search-bar {
@@ -1545,11 +1783,14 @@ box.vertical > revealer > toolbar.search-bar {
     // border-radius: 0 0 $window-radius $window-radius;
   }
 
-  viewport.frame { // Documents
+  viewport.frame {
+    // Documents
     background-color: transparent;
 
     widget > frame.content-view:not(:selected):not(:hover) {
-      border { border: none; }
+      border {
+        border: none;
+      }
 
       background-color: transparent;
       // border-radius: 0 0 $window-radius $window-radius;
@@ -1632,7 +1873,11 @@ terminal-window {
   }
 
   &.background.csd,
-  &.background.csd.maximized { border-radius: 0; } // Fixed gnome 3.32 issue: Unable to restore window size after maximization
+  &.background.csd.maximized {
+    border-radius: 0;
+  }
+
+  // Fixed gnome 3.32 issue: Unable to restore window size after maximization
 
   notebook > header {
     > box {
@@ -1650,7 +1895,9 @@ terminal-window {
   }
 }
 
-window.background { // gnome-terminal 3.32 setting
+window.background {
+
+  // gnome-terminal 3.32 setting
   > box.vertical > box.horizontal > frame {
     > border {
       border: none;
@@ -1663,7 +1910,9 @@ window.background { // gnome-terminal 3.32 setting
         background-color: $indicator;
         color: on($indicator);
 
-        button.flat { @extend %flat-button-on-indicator; }
+        button.flat {
+          @extend %flat-button-on-indicator;
+        }
 
         > row {
           &, &:hover, &:active, &:selected {
@@ -1705,17 +1954,25 @@ task-list-view {
     transition: $transition;
     margin: 0 -8px;
 
-    &:hover { transition: none; }
+    &:hover {
+      transition: none;
+    }
 
-    label { margin: 0 8px; }
+    label {
+      margin: 0 8px;
+    }
 
-    image.dim-label { min-width: 16px; }
+    image.dim-label {
+      min-width: 16px;
+    }
   }
 
   > box > revealer > box > button {
     margin: (12px * 2 - $medium-size) / 2;
 
-    .dim-label { color: inherit; }
+    .dim-label {
+      color: inherit;
+    }
   }
 }
 
@@ -1725,16 +1982,22 @@ tasklistview {
     outline: none;
 
     entry {
-      &, &:focus, &:disabled { box-shadow: none; }
+      &, &:focus, &:disabled {
+        box-shadow: none;
+      }
     }
 
-    image.dim-label { min-width: 16px; }
+    image.dim-label {
+      min-width: 16px;
+    }
   }
 
   > box > revealer > box > button {
     margin: (12px * 2 - $medium-size) / 2;
 
-    .dim-label { color: inherit; }
+    .dim-label {
+      color: inherit;
+    }
   }
 }
 
@@ -1743,16 +2006,22 @@ tasklistview {
  * Eog *
  *******/
 #eog-thumb-nav {
-  scrolledwindow { border-top: none; }
+  scrolledwindow {
+    border-top: none;
+  }
 }
 
 
 /*************
  * Evolution *
  *************/
-frame.taskbar > border { border-style: solid none none; }
+frame.taskbar > border {
+  border-style: solid none none;
+}
 
-box.vertical > paned.horizontal notebook widget .frame { border-style: none; }
+box.vertical > paned.horizontal notebook widget .frame {
+  border-style: none;
+}
 
 
 /***********
@@ -1768,15 +2037,21 @@ box.vertical > paned.horizontal notebook widget .frame { border-style: none; }
 /********
  * Gitg *
  ********/
-frame.commit-frame > border { border-style: solid none none; }
+frame.commit-frame > border {
+  border-style: solid none none;
+}
 
 
 /**************
  * Characters *
  **************/
-box.dialog-vbox scrolledwindow.related { border: 1px solid $frame; }
+box.dialog-vbox scrolledwindow.related {
+  border: 1px solid $frame;
+}
 
-list.categories { background-image: image($base-alt); }
+list.categories {
+  background-image: image($base-alt);
+}
 
 
 /*********
@@ -1794,7 +2069,9 @@ list.categories { background-image: image($base-alt); }
 /**************
  * Calculator *
  **************/
-button.title label { min-height: $medium-size; }
+button.title label {
+  min-height: $medium-size;
+}
 
 
 /*********
@@ -1802,8 +2079,7 @@ button.title label { min-height: $medium-size; }
  *********/
 window.background.csd.geary-main-window,
 window#GearyMainWindow.background.csd {
-  > deck > overlay >
-  box.vertical > paned.horizontal > box.sidebar.vertical {
+  > deck > overlay > box.vertical > paned.horizontal > box.sidebar.vertical {
     border-bottom-left-radius: $window-radius;
 
     statusbar {
@@ -1828,7 +2104,9 @@ window#GearyMainWindow.background.csd {
       background-image: none;
 
       > .geary-composer-embed {
-        actionbar > revealer > box { border-radius: 0; }
+        actionbar > revealer > box {
+          border-radius: 0;
+        }
 
         headerbar {
           color: $text;
@@ -1836,13 +2114,17 @@ window#GearyMainWindow.background.csd {
           box-shadow: none;
           border-bottom: 1px solid $frame;
 
-          button { @extend %button-flat; }
+          button {
+            @extend %button-flat;
+          }
         }
       }
     }
 
     .geary-composer-box {
-      actionbar > revealer > box { border-bottom-left-radius: 0; }
+      actionbar > revealer > box {
+        border-bottom-left-radius: 0;
+      }
     }
   }
 }
@@ -1851,13 +2133,18 @@ preferencesgroup, .geary-accounts-editor-pane {
   list {
     @extend %circular_list;
 
-    row { @extend %circular_row; }
+    row {
+      @extend %circular_row;
+    }
   }
 }
 
 .geary-accounts-editor-pane {
+
   frame:not(.geary-signature) > border,
-  scrolledwindow.frame { border: none; }
+  scrolledwindow.frame {
+    border: none;
+  }
 }
 
 .geary-main-window.unified {
@@ -1865,14 +2152,18 @@ preferencesgroup, .geary-accounts-editor-pane {
     background-color: $base;
 
     > leaflet > separator.sidebar, // centry
-    > leaflet > leaflet > separator.sidebar { // left
+
+    > leaflet > leaflet > separator.sidebar {
+      // left
       // border-right: none;
       background-color: $titlebar;
       transition: background-color $duration $ease-out,
-                  color $duration $ease-out,
-                  box-shadow $duration $ease-out;
+        color $duration $ease-out,
+        box-shadow $duration $ease-out;
 
-      &:backdrop { background-color: $titlebar-backdrop; }
+      &:backdrop {
+        background-color: $titlebar-backdrop;
+      }
     }
 
     > leaflet > leaflet > box.vertical + separator.sidebar {
@@ -1881,7 +2172,9 @@ preferencesgroup, .geary-accounts-editor-pane {
     }
   }
 
-  frame.geary-conversation-frame { // center part
+  frame.geary-conversation-frame {
+
+    // center part
     scrolledwindow {
       // margin: -1px 0; // hide .view top border
       padding: $space-size / 2;
@@ -1905,7 +2198,9 @@ preferencesgroup, .geary-accounts-editor-pane {
     background-color: $divider;
   }
 
-  geary-conversation-viewer#conversation_viewer { // right side
+  geary-conversation-viewer#conversation_viewer {
+
+    // right side
     list.background.conversation-listbox.content {
       > row.activatable {
         border: 1px solid $divider;
@@ -1940,11 +2235,14 @@ preferencesgroup, .geary-accounts-editor-pane {
 window.background.csd {
   > stack, // GameMode setting
   > stack > scrolledwindow > viewport > box, // User Themes (Workspace) setting
+
   > box > stack > scrolledwindow > viewport > box {
     > list {
       @extend %circular_list;
 
-      row { @extend %circular_row; }
+      row {
+        @extend %circular_row;
+      }
     }
   }
 
@@ -1954,18 +2252,26 @@ window.background.csd {
   > stack > box > stack > box > frame, // ArcMenu setting
   > stack > box > stack > scrolledwindow > viewport frame, // ArcMenu setting
   > stack > box > stack > box > scrolledwindow > viewport > frame, // ArcMenu setting
-  > stack > grid > scrolledwindow > viewport > box > frame { // GSConnect setting
-    > border { border: none; }
+
+  > stack > grid > scrolledwindow > viewport > box > frame {
+
+    // GSConnect setting
+    > border {
+      border: none;
+    }
 
     > list {
       @extend %circular_list;
 
-      row { @extend %circular_row; }
+      row {
+        @extend %circular_row;
+      }
     }
   }
 
   > stack > box > box > list,
-  > stack > box > stack > scrolledwindow > viewport > list { // ArcMenu setting sidebar
+  > stack > box > stack > scrolledwindow > viewport > list {
+    // ArcMenu setting sidebar
     border-bottom-left-radius: $window-radius;
   }
 
@@ -1982,8 +2288,13 @@ dialog.background.csd {
     > grid.horizontal {
       > scrolledwindow.frame {
         > viewport.frame {
-          list:first-child { border-radius: 0 0 0 $window-radius; }
-          list:last-child { border-radius: 0 0 $window-radius 0; }
+          list:first-child {
+            border-radius: 0 0 0 $window-radius;
+          }
+
+          list:last-child {
+            border-radius: 0 0 $window-radius 0;
+          }
         }
       }
     }
@@ -1994,7 +2305,8 @@ dialog.background.csd {
         border-radius: 0 0 $window-radius $window-radius;
         background-color: $base;
 
-        iconview.view:not(:hover):not(:selected):not(:active) { // Wallpaper setting window
+        iconview.view:not(:hover):not(:selected):not(:active) {
+          // Wallpaper setting window
           // @extend %view;
           background-color: transparent;
         }
@@ -2038,7 +2350,9 @@ dialog.background.csd {
     }
 
     viewport.frame {
-      &.view { border-radius: $corner-radius; }
+      &.view {
+        border-radius: $corner-radius;
+      }
     }
   }
 }
