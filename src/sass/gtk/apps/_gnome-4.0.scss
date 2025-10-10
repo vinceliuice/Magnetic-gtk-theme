@@ -35,6 +35,25 @@
     }
   }
 
+  .nautilus-grid-view {
+    child.activatable {
+      padding: 0;
+
+      #NautilusViewCell {
+        padding: 0;
+
+        .icon-ui-labels-box {
+          margin: 0 0 $space-size * 2;
+          border-spacing: 0;
+        }
+
+        .dim-label {
+          border-spacing: 0;
+        }
+      }
+    }
+  }
+
   .nautilus-list-view {
     padding: 0;
     margin: 0;
@@ -271,6 +290,11 @@ label.header {
   font-size: 10pt;
   font-weight: bold;
   color: $text-disabled;
+}
+
+label.heading {
+  font-weight: bold;
+  color: $text-secondary;
 }
 
 calendar-view.current,
