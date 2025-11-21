@@ -96,11 +96,6 @@ gridview {
 
       @extend %selected_items;
     }
-
-    box { //cells
-      border-spacing: $space-size + 2px; //label separation
-      margin: $space-size * 2;
-    }
   }
 }
 

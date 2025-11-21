@@ -40,10 +40,10 @@
       padding: 0;
 
       #NautilusViewCell {
-        padding: 0;
+        padding: $space-size;
 
         .icon-ui-labels-box {
-          margin: 0 0 $space-size * 2;
+          margin: 0 0 $space-size;
           border-spacing: 0;
         }
 
@@ -67,6 +67,7 @@
       > row.activatable {
         padding: 0;
         margin: 0;
+        border-radius: $menuitem-radius;
 
         > cell {
           padding: 0;
